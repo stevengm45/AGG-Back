@@ -1,4 +1,4 @@
-package com.agg.certificados.repositories.typeDocument;
+package com.agg.certificados.repositories.typeDocumentRepository;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

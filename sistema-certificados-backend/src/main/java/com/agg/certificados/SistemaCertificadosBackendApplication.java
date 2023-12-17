@@ -2,7 +2,7 @@ package com.agg.certificados;
 
 
 import com.agg.certificados.entity.*;
-import com.agg.certificados.repositories.typeDocument.ITypeDocumentRepository;
+import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.services.usersServices.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
