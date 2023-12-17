@@ -1,6 +1,6 @@
 package com.agg.certificados.entity;
 
-import com.agg.certificados.domain.models.User;
+import com.agg.certificados.entity.User;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -17,7 +17,7 @@ public class Botadero {
     public Date create_date;
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "user_id")
-    public com.agg.certificados.domain.models.User user_id;
+    public com.agg.certificados.entity.User user_id;
     public boolean status;
 
     public Botadero(){
