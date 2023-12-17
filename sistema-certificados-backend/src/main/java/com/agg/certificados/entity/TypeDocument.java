@@ -1,4 +1,4 @@
-package com.agg.certificados.domain.models;
+package com.agg.certificados.entity;
 
 import jakarta.persistence.*;
 

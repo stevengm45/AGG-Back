@@ -1,9 +1,9 @@
-package com.agg.certificados.controller;
+package com.agg.certificados.controllers;
 
 import com.agg.certificados.entity.Rol;
 import com.agg.certificados.entity.User;
 import com.agg.certificados.entity.UserRol;
-import com.agg.certificados.services.UserService;
+import com.agg.certificados.services.usersServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

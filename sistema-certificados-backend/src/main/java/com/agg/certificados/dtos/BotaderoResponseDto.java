@@ -1,15 +1,30 @@
+package com.agg.certificados.dtos;
 
-package com.agg.certificados.domain.dtos;
+import com.agg.certificados.entity.Botadero;
 
 import java.util.Date;
 
-public class BotaderoRequestDto {
+public class BotaderoResponseDto {
     public int id_botadero;
     public String city;
     public String property_name;
     public Date create_date;
     public int user_id;
     public boolean status;
+
+
+    public BotaderoResponseDto(Botadero entity){
+        this.id_botadero = entity.id_botadero;
+        this.city = entity.city;
+        this.property_name = entity.property_name;
+        this.create_date = entity.create_date;
+        this.status = entity.status;
+        this.user_id = entity.user_id.id_user;
+    }
+
+    public BotaderoResponseDto(){
+
+    }
 
     public int getId_botadero() {
         return id_botadero;

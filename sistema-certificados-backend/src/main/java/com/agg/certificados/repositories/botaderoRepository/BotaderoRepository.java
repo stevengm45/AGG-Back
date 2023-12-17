@@ -1,6 +1,6 @@
 package com.agg.certificados.repositories.botaderoRepository;
 
-import com.agg.certificados.domain.models.Botadero;
+import com.agg.certificados.entity.Botadero;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

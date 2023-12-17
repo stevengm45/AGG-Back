@@ -1,6 +1,6 @@
-package com.agg.certificados.repositories.user;
+package com.agg.certificados.repositories.userRepository;
 
-import com.agg.certificados.domain.models.User;
+import com.agg.certificados.entity.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class UserRepository implements  IUserRepository{
+public class UserRepository implements IUserRepository{
     @Override
     public void flush() {
 
@@ -33,7 +33,7 @@ public class UserRepository implements  IUserRepository{
     }
 
     @Override
-    public void deleteAllByIdInBatch(Iterable<Integer> integers) {
+    public void deleteAllByIdInBatch(Iterable<Long> integers) {
 
     }
 
@@ -47,7 +47,7 @@ public class UserRepository implements  IUserRepository{
      * @deprecated
      */
     @Override
-    public User getOne(Integer integer) {
+    public User getOne(Long integer) {
         return null;
     }
 
@@ -56,12 +56,12 @@ public class UserRepository implements  IUserRepository{
      * @deprecated
      */
     @Override
-    public User getById(Integer integer) {
+    public User getById(Long integer) {
         return null;
     }
 
     @Override
-    public User getReferenceById(Integer integer) {
+    public User getReferenceById(Long integer) {
         return null;
     }
 
@@ -111,12 +111,12 @@ public class UserRepository implements  IUserRepository{
     }
 
     @Override
-    public Optional<User> findById(Integer integer) {
+    public Optional<User> findById(Long integer) {
         return findById(integer);
     }
 
     @Override
-    public boolean existsById(Integer integer) {
+    public boolean existsById(Long integer) {
         return false;
     }
 
@@ -126,7 +126,7 @@ public class UserRepository implements  IUserRepository{
     }
 
     @Override
-    public List<User> findAllById(Iterable<Integer> integers) {
+    public List<User> findAllById(Iterable<Long> integers) {
         return null;
     }
 
@@ -136,7 +136,7 @@ public class UserRepository implements  IUserRepository{
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(Long integer) {
 
     }
 
@@ -146,7 +146,7 @@ public class UserRepository implements  IUserRepository{
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends Integer> integers) {
+    public void deleteAllById(Iterable<? extends Long> integers) {
 
     }
 

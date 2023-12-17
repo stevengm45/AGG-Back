@@ -23,8 +23,20 @@ public class User {
     private boolean status;
     private String profile;
 
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "type_document_id")
+    public TypeDocument type_document_id;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRol> userRoles = new HashSet<>();
+
+    public TypeDocument getType_document_id() {
+        return type_document_id;
+    }
+
+    public void setType_document_id(TypeDocument type_document_id) {
+        this.type_document_id = type_document_id;
+    }
 
     public Long getId() {
         return id;
