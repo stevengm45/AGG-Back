@@ -1,12 +1,12 @@
-package services.impl;
+package com.agg.certificados.services.impl;
 
 import com.agg.certificados.entity.User;
 import com.agg.certificados.entity.UserRol;
 import com.agg.certificados.repository.RolRepository;
 import com.agg.certificados.repository.UserRepository;
+import com.agg.certificados.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import services.UserService;
 
 import java.util.Set;
 
@@ -34,5 +34,15 @@ public class UserServiceImpl implements UserService {
             userLocal = userRepository.save(user);
         }
         return userLocal;
+    }
+
+    @Override
+    public User getUser(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 }
