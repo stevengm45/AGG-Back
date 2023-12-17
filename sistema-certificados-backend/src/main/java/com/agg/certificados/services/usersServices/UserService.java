@@ -2,16 +2,16 @@ package services.impl;
 
 import com.agg.certificados.entity.User;
 import com.agg.certificados.entity.UserRol;
-import com.agg.certificados.repository.RolRepository;
-import com.agg.certificados.repository.UserRepository;
+import com.agg.certificados.repositories.RolRepository;
+import com.agg.certificados.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import services.UserService;
+import com.agg.certificados.services.usersServices.IUserService;
 
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;

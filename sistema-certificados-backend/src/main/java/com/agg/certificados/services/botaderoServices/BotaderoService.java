@@ -1,11 +1,11 @@
 package com.agg.certificados.services.botaderoServices;
 
-import com.agg.certificados.domain.dtos.BotaderoRequestDto;
-import com.agg.certificados.domain.dtos.BotaderoResponseDto;
-import com.agg.certificados.domain.models.Botadero;
+import com.agg.certificados.dtos.BotaderoRequestDto;
+import com.agg.certificados.dtos.BotaderoResponseDto;
+import com.agg.certificados.entity.Botadero;
 import com.agg.certificados.domain.models.User;
 import com.agg.certificados.repositories.botaderoRepository.*;
-import com.agg.certificados.repositories.user.IUserRepository;
+import com.agg.certificados.repositories.userRepository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

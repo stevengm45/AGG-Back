@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import services.UserService;
+import com.agg.certificados.services.usersServices.IUserService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ import java.util.Set;
 public class SistemaCertificadosBackendApplication implements CommandLineRunner {
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaCertificadosBackendApplication.class, args);
@@ -24,7 +24,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
+		/*User user = new User();
 
 		user.setFull_name("Steven Gonzalez");
 		user.setUsername("stevengm45");
@@ -44,6 +44,6 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 		User userSaved = userService.saveUser(user, userRoles);
 		System.out.println(userSaved.getUsername());
-
+*/
 	}
 }
