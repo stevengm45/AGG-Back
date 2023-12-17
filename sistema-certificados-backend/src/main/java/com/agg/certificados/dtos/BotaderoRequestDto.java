@@ -8,7 +8,7 @@ public class BotaderoRequestDto {
     public String city;
     public String property_name;
     public Date create_date;
-    public int user_id;
+    public long user_id;
     public boolean status;
 
     public int getId_botadero() {
@@ -43,11 +43,11 @@ public class BotaderoRequestDto {
         this.create_date = create_date;
     }
 
-    public int getUser_id() {
+    public long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(long user_id) {
         this.user_id = user_id;
     }
 

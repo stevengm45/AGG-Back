@@ -2,8 +2,7 @@ package com.agg.certificados.services.botaderoServices;
 
 import com.agg.certificados.dtos.BotaderoRequestDto;
 import com.agg.certificados.dtos.BotaderoResponseDto;
-import com.agg.certificados.entity.Botadero;
-import com.agg.certificados.domain.models.User;
+import com.agg.certificados.entity.*;
 import com.agg.certificados.repositories.botaderoRepository.*;
 import com.agg.certificados.repositories.userRepository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class BotaderoService implements IBotaderoService{
 
         for (Botadero entity:entities) {
             //Obtiene el usuario
-            Optional<User> user = userRepository.findById(entity.getUser_id().getId_user());
+            Optional<User> user = userRepository.findById(entity.getUser_id().getId());
             //Setea el usuario
             entity.setUser_id(user.orElse(null));
             //Agrega a la lista

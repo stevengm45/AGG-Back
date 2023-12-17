@@ -21,10 +21,9 @@ public class User {
     private String email;
     private Date create_date;
     private boolean status;
-    private String profile;
-
+    private Long number_id;
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "type_document_id")
+    @JoinColumn(name = "type_document_id")
     public TypeDocument type_document_id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
@@ -93,21 +92,20 @@ public class User {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
     public Set<UserRol> getUserRoles() {
         return userRoles;
     }
 
     public void setUserRoles(Set<UserRol> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Long getNumber_id() {
+        return number_id;
+    }
+
+    public void setNumber_id(Long number_id) {
+        this.number_id = number_id;
     }
 
     public User(){

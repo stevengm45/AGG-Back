@@ -34,7 +34,7 @@ public class BotaderoController {
         dto.setCity(botaderoEntity.orElse(null).city);
         dto.setProperty_name(botaderoEntity.orElse(null).property_name);
         dto.setCreate_date(botaderoEntity.orElse(null).create_date);
-        dto.setUser_id(botaderoEntity.orElse(null).getUser_id().getId_user());
+        dto.setUser_id(botaderoEntity.orElse(null).getUser_id().getId());
         dto.setStatus(botaderoEntity.orElse(null).status);
 
         return ResponseEntity.ok(dto);

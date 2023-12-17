@@ -9,7 +9,7 @@ public class BotaderoResponseDto {
     public String city;
     public String property_name;
     public Date create_date;
-    public int user_id;
+    public long user_id;
     public boolean status;
 
 
@@ -19,7 +19,7 @@ public class BotaderoResponseDto {
         this.property_name = entity.property_name;
         this.create_date = entity.create_date;
         this.status = entity.status;
-        this.user_id = entity.user_id.id_user;
+        this.user_id = entity.user_id.getId();
     }
 
     public BotaderoResponseDto(){
@@ -58,11 +58,11 @@ public class BotaderoResponseDto {
         this.create_date = create_date;
     }
 
-    public int getUser_id() {
+    public long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(long user_id) {
         this.user_id = user_id;
     }
 
