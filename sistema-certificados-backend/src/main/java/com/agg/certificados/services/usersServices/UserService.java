@@ -25,7 +25,7 @@ public class UserService implements IUserService {
 
         if(userLocal != null) {
             System.out.println("El usuario ya existe");
-            throw new Exception("E usuario ya esta presente");
+            throw new Exception("El usuario ya esta presente");
         } else {
             for (UserRol userRol:userRoles) {
                 rolRepository.save(userRol.getRol());

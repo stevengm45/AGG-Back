@@ -43,7 +43,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 		User user = new User();
 
 		user.setFull_name("Steven Gonzalez");
-		user.setUsername("stevengm45");
+		user.setUsername("steven");
 		user.setPassword("12345");
 		user.setEmail("steven@gmail.com");
 		user.setType_document_id(typeDocument);
