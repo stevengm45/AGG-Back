@@ -5,6 +5,7 @@ import com.agg.certificados.dtos.BotaderoResponseDto;
 import com.agg.certificados.entity.Botadero;
 import com.agg.certificados.services.botaderoServices.IBotaderoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,11 @@ public class BotaderoController {
 
     @PostMapping
     public ResponseEntity<Integer> saveBotadero(@RequestBody BotaderoRequestDto dto) {
+
+        if (dto.user_id == 0)
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+
         return ResponseEntity.ok(botaderoService.save(dto));
     }
 
@@ -55,6 +61,12 @@ public class BotaderoController {
         return ResponseEntity.ok(botaderoService.update(dto,id));
     }
 
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Boolean> updateStatusBotadero(@PathVariable("id") int id, @RequestBody boolean status) {
+        if (id == 0)
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
+        return ResponseEntity.ok(botaderoService.updateStatus(id,status));
+    }
 
 }

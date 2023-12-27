@@ -1,9 +1,8 @@
 package com.agg.certificados.entity;
 
-import com.agg.certificados.entity.User;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "botaderos")
@@ -14,7 +13,7 @@ public class Botadero {
     public int id_botadero;
     public String city;
     public String property_name;
-    public Date create_date;
+    public LocalDate create_date;
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user_id;
@@ -23,7 +22,7 @@ public class Botadero {
     public Botadero(){
     }
 
-    public Botadero(int id_botadero, String city, String property_name, Date create_date, User user_id, boolean status) {
+    public Botadero(int id_botadero, String city, String property_name, LocalDate create_date, User user_id, boolean status) {
         this.id_botadero = id_botadero;
         this.city = city;
         this.property_name = property_name;
@@ -56,11 +55,11 @@ public class Botadero {
         this.property_name = property_name;
     }
 
-    public Date getCreate_date() {
+    public LocalDate getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(Date create_date) {
+    public void setCreate_date(LocalDate create_date) {
         this.create_date = create_date;
     }
 

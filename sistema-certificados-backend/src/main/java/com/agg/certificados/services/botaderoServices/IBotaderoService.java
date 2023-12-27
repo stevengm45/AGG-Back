@@ -15,4 +15,6 @@ public interface IBotaderoService {
     boolean delete(int id);
     boolean update(BotaderoRequestDto dto,int id);
 
+    boolean updateStatus(int id, boolean status);
+
 }

@@ -1,18 +1,15 @@
 package com.agg.certificados;
 
 
-import com.agg.certificados.entity.*;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.services.usersServices.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
@@ -29,10 +26,19 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 		SpringApplication.run(SistemaCertificadosBackendApplication.class, args);
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer(){
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry){
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("*").allowedHeaders("*");
+			}
+		};
+	}
 	@Override
 	public void run(String... args) throws Exception {
 
-		Set<TypeDocument> typeDocuments = new HashSet<>();
+		/*Set<TypeDocument> typeDocuments = new HashSet<>();
 		TypeDocument typeDocument = new TypeDocument();
 
 		typeDocument.setName("CC");
@@ -61,7 +67,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 
 		User userSaved = userService.saveUser(user, userRoles);
-		System.out.println(userSaved.getUsername());
+		System.out.println(userSaved.getUsername());*/
 
 	}
 }
