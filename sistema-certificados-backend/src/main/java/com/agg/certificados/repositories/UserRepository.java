@@ -1,4 +1,4 @@
-package com.agg.certificados.repository;
+package com.agg.certificados.repositories;
 
 import com.agg.certificados.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

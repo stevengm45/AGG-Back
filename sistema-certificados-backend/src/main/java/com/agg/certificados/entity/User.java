@@ -1,9 +1,13 @@
 package com.agg.certificados.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.xml.crypto.Data;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +27,21 @@ public class User {
     private String email;
     private Date create_date;
     private boolean status;
-    private String profile;
+    private Long number_id;
+    @ManyToOne
+    @JoinColumn(name = "type_document_id")
+    public TypeDocument type_document_id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRol> userRoles = new HashSet<>();
+
+    public TypeDocument getType_document_id() {
+        return type_document_id;
+    }
+
+    public void setType_document_id(TypeDocument type_document_id) {
+        this.type_document_id = type_document_id;
+    }
 
     public Long getId() {
         return id;
@@ -40,8 +55,37 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> autorities = new HashSet<>();
+        this.userRoles.forEach(userRol -> {
+            autorities.add(new Authority(userRol.getRol().getName()));
+        });
+        return autorities;
     }
 
     public String getPassword() {
@@ -83,21 +127,20 @@ public class User {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
     public Set<UserRol> getUserRoles() {
         return userRoles;
     }
 
     public void setUserRoles(Set<UserRol> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Long getNumber_id() {
+        return number_id;
+    }
+
+    public void setNumber_id(Long number_id) {
+        this.number_id = number_id;
     }
 
     public User(){
