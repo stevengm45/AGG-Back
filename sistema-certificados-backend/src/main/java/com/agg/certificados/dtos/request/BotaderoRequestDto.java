@@ -1,5 +1,5 @@
 
-package com.agg.certificados.dtos;
+package com.agg.certificados.dtos.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,13 +1,14 @@
 package com.agg.certificados.services.botaderoServices;
 
-import com.agg.certificados.dtos.BotaderoRequestDto;
-import com.agg.certificados.dtos.BotaderoResponseDto;
+import com.agg.certificados.dtos.request.BotaderoRequestDto;
+import com.agg.certificados.dtos.response.BotaderoResponseDto;
 import com.agg.certificados.entity.Botadero;
 import com.agg.certificados.entity.User;
 import com.agg.certificados.repositories.botaderoRepository.IBotaderoRepository;
 import com.agg.certificados.repositories.userRepository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class BotaderoService implements IBotaderoService{
     @Autowired
     private IUserRepository userRepository;
 
+    @Transactional
     public int save(BotaderoRequestDto dto) {
 
         boolean status = true;
@@ -67,7 +69,7 @@ public class BotaderoService implements IBotaderoService{
         return !botaderoRepository.existsById(id);
     }
 
-    @Override
+    @Transactional
     public boolean update(BotaderoRequestDto dto, int id) {
         Optional<Botadero> botadero = botaderoRepository.findById(id);
         Optional<User> user = userRepository.findById(dto.user_id);

@@ -1,4 +1,4 @@
-package com.agg.certificados.dtos;
+package com.agg.certificados.dtos.response;
 
 import com.agg.certificados.entity.Botadero;
 

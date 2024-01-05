@@ -1,7 +1,7 @@
 package com.agg.certificados.controllers;
 
-import com.agg.certificados.dtos.BotaderoRequestDto;
-import com.agg.certificados.dtos.BotaderoResponseDto;
+import com.agg.certificados.dtos.request.BotaderoRequestDto;
+import com.agg.certificados.dtos.response.BotaderoResponseDto;
 import com.agg.certificados.entity.Botadero;
 import com.agg.certificados.services.botaderoServices.IBotaderoService;
 import org.springframework.beans.factory.annotation.Autowired;
