@@ -1,14 +1,16 @@
 package com.agg.certificados.controllers;
 
 
-import com.agg.certificados.dtos.response.BotaderoResponseDto;
 import com.agg.certificados.dtos.response.FileBase64ResponseDto;
 import com.agg.certificados.entity.Botadero;
+import com.agg.certificados.entity.DataDriver;
 import com.agg.certificados.entity.Rol;
-import com.agg.certificados.services.certificationServices.service.IPdfGenerateService;
+import com.agg.certificados.entity.TypeDocument;
+import com.agg.certificados.services.certificationServices.service.ICertificationService;
+import com.agg.certificados.services.dataGeneratorServices.IDataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +23,12 @@ import java.util.Map;
 @RequestMapping("/certificate")
 public class CertificateController {
     @Autowired
-    private IPdfGenerateService pdfGenerateService;
+    private ICertificationService certificateService;
+    @Autowired
+    private IDataGeneratorService dataGeneratorService;
 
     @GetMapping
-    public FileBase64ResponseDto pruebaCertifacte() {
+    public String pruebaCertifacte() {
 
 
         Map<String, Object> data = new HashMap<>();
@@ -52,9 +56,23 @@ public class CertificateController {
 
         data.put("roles", roles);
 
+        //-------------
+        TypeDocument typeDocument = new TypeDocument(2,"Prueba de tipo documento",true,"TPD");
+
+        DataDriver dataDriver = new DataDriver();
+        dataDriver.type_document_id = typeDocument;
+
+        data.put("dataDriver", dataDriver);
+
+
         //Se debe cambiar el nombre del TemplateName, para generar el archivo, ya que de acuerdo a eso asi mismo se genera
 
-        return pdfGenerateService.generatePdfFile("prueba",data,"prueba.pdf");
+        return certificateService.generatePdfFile("prueba",data,"prueba.pdf");
 
+    }
+    @GetMapping("/{id}")
+    public FileBase64ResponseDto generateCertificates(@PathVariable("id") Long idDataGenerator){
+
+        return certificateService.generateCertificates(dataGeneratorService.getInformationCertificate(idDataGenerator));
     }
 }

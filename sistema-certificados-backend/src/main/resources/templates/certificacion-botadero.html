@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th:first-child, td:first-child {
+            width: 55%; 
+        }
+        th {
+            border: 1.3px solid black;
+            text-align: left;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        td {
+            border: 1.3px solid black;
+            text-align: center;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        p,
+        h5 {
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .title {
+            background-color: rgb(219, 255, 233)
+        }
+
+        p {
+            text-align: justify;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h5 style="text-align: center;" th:text="'CERTIFICACIÓN N° ' + ${certification.final_number_certification}"></h5>
+    <p style="text-align: center;">Disposición Final de tierra y material sobrante <br></br>
+        Realizada por el gestor SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+        ALEJANDRO GARZÓN GUZMAN <br></br>
+        NIT 901191011-8
+    </p>
+
+    <table>
+        <tr>
+            <th class="title" colspan="3" style="text-align: center;">DATOS BÁSICOS DEL GESTOR</th>
+        </tr>
+        <tr>
+            <th>Número único asignado para el gestor por parte de la autoridad ambiental por proyecto</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Nombre o razón social</th>
+            <td colspan="2">ALEJANDRO GARZÓN GUZMÁN / SUMINISTRAMOS Y CONTRATAMOS AGG SAS</td>
+        </tr>
+        <tr>
+            <th>Documento de identificación o NIT</th>
+            <td colspan="2">901191011-8</td>
+        </tr>
+        <tr>
+            <th>Representante legal</th>
+            <td colspan="2">ALEJANDRO GARZÓN GUZMÁN</td>
+        </tr>
+        <tr>
+            <th>Dirección</th>
+            <td colspan="2">CALLE 70 # 12B – 77 SIETE DE AGOSTO (Oficina) </td>
+        </tr>
+        <tr>
+            <th>Teléfono</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Correo electrónico</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Municipio o Distrito del predio</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Nombre del predio</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th rowspan="3">Gestor</th>
+            <td colspan="1">Punto limpio</td>
+            <!-- CAMBIAR AQUI POR SI SE ELIGE ESTE TIPO DE GESTOR -->
+            <td colspan="1">x</td>
+
+        </tr>
+        <tr>
+            <td>Planta de aprovechamiento</td>
+            <!-- CAMBIAR AQUI POR SI SE ELIGE ESTE TIPO DE GESTOR -->
+            <td colspan="1">x</td>
+        </tr>
+        <tr>
+            <td>Disposición final</td>
+            <!-- CAMBIAR AQUI POR SI SE ELIGE ESTE TIPO DE GESTOR -->
+            <td colspan="1">x</td>
+
+        </tr>
+        <tr>
+            <th class="title" colspan="3" style="text-align: center;">DATOS BÁSICOS DEL GENERADOR</th>
+        </tr>
+        <tr>
+            <th>Número único asignado para el gestor por parte de la autoridad ambiental competente por proyecto</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Nombre o razón social</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Documento de identificación o NIT</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Representante legal</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Dirección domicilio</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Teléfono</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Correo electrónico</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th>Dirección generación de RCD</th>
+            <td colspan="2"></td>
+        </tr>
+
+        <tr>
+            <th class="title" colspan="3" style="text-align: center;">CANTIDADES DE RCD RECIBIDOS DEL GENERADOR POR TIPO
+            </th>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: center;">Tipo de residuo</th>
+            <th colspan="2" style="text-align: center;">Cantidad de RCD recibidos del <br></br> generador (t)</th>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">1. Residuos de construcción y demolición - RCD susceptibles de
+                aprovechamiento:</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">1.1 Productos de excavación y sobrantes de la adecuación del
+                terreno: coberturas vegetales, tierras, limos y materiales pétreos productos de la excavación, entre
+                otros.</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">1.2 Productos de cimentaciones y pilotajes: arcillas, bentonitas y
+                demás.</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">1.3 Pétreos: hormigón, arenas, gravas, gravillas, cantos, pétreos
+                asfalticos, trozos de ladrillos y bloques, cerámicas,sobrantes de mezcla de cementos y concretos
+                hidráulicos, entre otros.</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">1.4 No pétreos: vidrio, metales como acero, hierro, cobre,
+                aluminio, con o sin recubrimiento de zinc o estaño, plásticos tales como: PVC, polietileno,
+                policarbonato, acrílico, espumas de poliestireno y de poliuretano, gomas y cauchos,
+                madera y compuestos de madera, cartón-yeso (drywall), entre otros.</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">2. Residuos de construcción y demolición - RCD no susceptibles de
+                aprovechamiento:</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">2.1 Los contaminados con residuos peligrosos.</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">2.2. Los que por su estado no pueden ser aprovechados.</td>
+            <td colspan="2"></td>
+        </tr>
+
+        <tr>
+            <td colspan="1" style="text-align: left;">2.3 Los que tengan características de peligrosidad, estos se
+                regirán por la normatividad ambiental especial establecida para su gestión.</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Total, RCD recibidos (t)</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Fecha recepción de los RCD</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th colspan="3" style="text-align: center;">DATOS BÁSICOS DEL GESTOR DE TRANSPORTE</th>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Nombre o razón social / Identificación</th>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Placa de vehículo</th>
+            <td colspan="2"></td>
+        </tr>
+    </table>
+    <p>
+
+        La presente certificación se basa en el anexo II de la resolución 1257 del 2021 “Por la cual se modifica la
+        Resolución 0472 de 2017 sobre la gestión integral de Residuos de Construcción y Demolición – RCD y
+        se adoptan otras disposiciones” y se expide a solicitud del interesado,
+        <!-- Cambiar aquí abajo la fecha  -->
+        a los 09 días del mes Noviembre del 2023. Para ser presentada ante la autoridad Ambiental competente IMPORTANTE
+        PARA CONFIRMAR LA VERACIDAD DE ESTE CERTIFICADO COMUNÍQUESE CON NUESTRA OFICINA.
+        <br></br><br></br>
+        Se anexa certificado de calibración de la báscula utilizada para realizar el proceso de pesaje de los RCD
+        recibidos, como lo establece el marco normativo en su artículo 3 de la Resolución 1257 del 2021.
+        <br></br><br></br>
+        Cordialmente,
+    </p>
+    <p>
+        <!-- agregar la imagen -->
+    </p>
+    <p>
+        <strong>
+            ALEJANDRO GARZÓN GUZMÁN
+            <br></br>
+            Representante legal
+            <br></br>
+        </strong>
+        Suministramos y contratamos
+    </p>
+</body>
+
+</html>

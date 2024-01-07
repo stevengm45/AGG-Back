@@ -1,5 +1,6 @@
 package com.agg.certificados.dtos.request;
 
+import com.agg.certificados.entity.ManagerDataGenerator;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class DataGeneratorRequestDto {
     @NotNull
     public Long data_manager_id;
     @NotNull
-    public Long manager_id;
+    public List<ManagerDataGeneratorRequestDto> manager;
     public String unic_number;
     @NotNull
     public String name;
@@ -34,4 +35,6 @@ public class DataGeneratorRequestDto {
     public List<QuantitiesRcdRequestDto> quantitiesRcd;
     @NotNull
     public DataDriverRequestDto data_driver;
+    @NotNull
+    public PriceRcdRequestDto price_rcd;
 }

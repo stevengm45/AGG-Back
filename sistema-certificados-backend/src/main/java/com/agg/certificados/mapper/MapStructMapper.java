@@ -31,7 +31,7 @@ public class MapStructMapper implements IMapStructMapper{
         dto.id_data_generator = entity.id_data_generator;
         dto.botadero = new BotaderoResponseDto(entity.botadero_id);
         dto.data_manager = DataManagerToDataManagerResponseDto(entity.data_manager_id);
-        dto.manager = ManagerToManagerResponseDto(entity.manager_id);
+
         dto.unic_number = entity.unic_number;
         dto.name = entity.name;
         dto.type_document = TypeDocumentToTypeDocumentResponseDto(entity.type_document_id);
@@ -42,6 +42,7 @@ public class MapStructMapper implements IMapStructMapper{
         dto.email = entity.email;
         dto.address_rcd = entity.address_rcd;
         dto.reception_date_rcd = entity.reception_date_rcd;
+        dto.total_rcd = entity.total_rcd;
 
         return dto;
     }
@@ -63,6 +64,19 @@ public class MapStructMapper implements IMapStructMapper{
 
         return dto;
     }
+
+    @Override
+    public PriceRcdResponseDto PriceRcdToPriceRcdResponseDto(PriceRcd entity){
+
+        PriceRcdResponseDto dto = new PriceRcdResponseDto();
+
+        dto.price_m3 = entity.price_m3;
+        dto.total_price = entity.total_price;
+        dto.id_price_rcd = entity.id_price_rcd;
+
+        return dto;
+    }
+
 
     @Override
     public ManagerResponseDto ManagerToManagerResponseDto(Manager entity){

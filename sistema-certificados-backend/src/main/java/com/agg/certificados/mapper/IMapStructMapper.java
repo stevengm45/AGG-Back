@@ -13,4 +13,5 @@ public interface IMapStructMapper {
     DataDriverResponseDto DataDriverToDataDriverResponseDto(DataDriver entity);
     QuantitiesRcdResponseDto QuantitiesRcdToQuantitiesRcdResponseDto(QuantitiesRcd entity);
     TypeRcdResponseDto TypeRcdToTypeRcdResponseDto(TypeRcd entity);
+    PriceRcdResponseDto PriceRcdToPriceRcdResponseDto(PriceRcd entity);
 }

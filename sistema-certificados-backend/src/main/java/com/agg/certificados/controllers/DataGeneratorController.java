@@ -1,11 +1,9 @@
 package com.agg.certificados.controllers;
 
-import com.agg.certificados.dtos.request.BotaderoRequestDto;
 import com.agg.certificados.dtos.request.DataGeneratorRequestDto;
 import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
 import com.agg.certificados.services.dataGeneratorServices.IDataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
