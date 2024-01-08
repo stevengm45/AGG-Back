@@ -1,7 +1,7 @@
 package com.agg.certificados.entity;
 
 import com.agg.certificados.entity.User;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Date;
 

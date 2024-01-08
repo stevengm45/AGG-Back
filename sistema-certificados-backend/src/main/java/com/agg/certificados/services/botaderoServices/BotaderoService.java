@@ -3,8 +3,8 @@ package com.agg.certificados.services.botaderoServices;
 import com.agg.certificados.dtos.BotaderoRequestDto;
 import com.agg.certificados.dtos.BotaderoResponseDto;
 import com.agg.certificados.entity.*;
+import com.agg.certificados.repositories.UserRepository;
 import com.agg.certificados.repositories.botaderoRepository.*;
-import com.agg.certificados.repositories.userRepository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class BotaderoService implements IBotaderoService{
     @Autowired
     private IBotaderoRepository botaderoRepository;
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     public int save(BotaderoRequestDto dto) {
 

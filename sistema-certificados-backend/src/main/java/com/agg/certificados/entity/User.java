@@ -1,13 +1,10 @@
 package com.agg.certificados.entity;
 
-
-
-import javax.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.xml.crypto.Data;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,22 +23,32 @@ public class User implements UserDetails {
     private String full_name;
     private String email;
     private Date create_date;
-    private boolean status;
+    private boolean enabled = true;
     private Long number_id;
     @ManyToOne
     @JoinColumn(name = "type_document_id")
     public TypeDocument type_document_id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
     private Set<UserRol> userRoles = new HashSet<>();
 
-    public TypeDocument getType_document_id() {
-        return type_document_id;
+    public User(){
+
     }
 
-    public void setType_document_id(TypeDocument type_document_id) {
+    public User(Long id, String username, String password, String full_name, String email, Date create_date, boolean enabled, Long number_id, TypeDocument type_document_id) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.full_name = full_name;
+        this.email = email;
+        this.create_date = create_date;
+        this.enabled = enabled;
+        this.number_id = number_id;
         this.type_document_id = type_document_id;
     }
+
 
     public Long getId() {
         return id;
@@ -70,22 +77,17 @@ public class User implements UserDetails {
         return true;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Authority> autorities = new HashSet<>();
+        Set<Authority> authorities = new HashSet<>();
         this.userRoles.forEach(userRol -> {
-            autorities.add(new Authority(userRol.getRol().getName()));
+            authorities.add(new Authority(userRol.getRol().getRolName()));
         });
-        return autorities;
+        return authorities;
     }
 
     public String getPassword() {
@@ -120,19 +122,12 @@ public class User implements UserDetails {
         this.create_date = create_date;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-    public Set<UserRol> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRol> userRoles) {
-        this.userRoles = userRoles;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Long getNumber_id() {
@@ -143,7 +138,21 @@ public class User implements UserDetails {
         this.number_id = number_id;
     }
 
-    public User(){
-
+    public TypeDocument getType_document_id() {
+        return type_document_id;
     }
+
+    public void setType_document_id(TypeDocument type_document_id) {
+        this.type_document_id = type_document_id;
+    }
+
+    public Set<UserRol> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRol> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+
 }
