@@ -1,6 +1,6 @@
 package com.agg.certificados.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "type_documents")

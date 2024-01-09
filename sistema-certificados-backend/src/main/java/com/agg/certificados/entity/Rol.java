@@ -1,21 +1,28 @@
 package com.agg.certificados.entity;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
-@Table (name = "roles")
+@Table(name = "roles")
 public class Rol {
 
     @Id
     private Long rolId;
-    private String name;
+    private String rolName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "rol")
-    private Set<UserRol> usersRoles = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "rol")
+    private Set<UserRol> userRoles = new HashSet<>();
+
+    public Rol(){
+
+    }
+
+    public Rol(Long rolId, String rolName) {
+        this.rolId = rolId;
+        this.rolName = rolName;
+    }
 
     public Long getRolId() {
         return rolId;
@@ -25,23 +32,19 @@ public class Rol {
         this.rolId = rolId;
     }
 
-    public String getName() {
-        return name;
+    public String getRolName() {
+        return rolName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRolName(String rolNombre) {
+        this.rolName = rolNombre;
     }
 
-    public Set<UserRol> getUsersRoles() {
-        return usersRoles;
+    public Set<UserRol> getUsuarioRoles() {
+        return userRoles;
     }
 
-    public void setUsersRoles(Set<UserRol> usersRoles) {
-        this.usersRoles = usersRoles;
-    }
-
-    public Rol(){
-
+    public void setUserRoles(Set<UserRol> userRoles) {
+        this.userRoles = userRoles;
     }
 }

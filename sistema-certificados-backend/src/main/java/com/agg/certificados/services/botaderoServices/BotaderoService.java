@@ -2,14 +2,12 @@ package com.agg.certificados.services.botaderoServices;
 
 import com.agg.certificados.dtos.BotaderoRequestDto;
 import com.agg.certificados.dtos.BotaderoResponseDto;
-import com.agg.certificados.entity.Botadero;
-import com.agg.certificados.entity.User;
-import com.agg.certificados.repositories.botaderoRepository.IBotaderoRepository;
-import com.agg.certificados.repositories.userRepository.IUserRepository;
+import com.agg.certificados.entity.*;
+import com.agg.certificados.repositories.UserRepository;
+import com.agg.certificados.repositories.botaderoRepository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,19 +17,17 @@ public class BotaderoService implements IBotaderoService{
     @Autowired
     private IBotaderoRepository botaderoRepository;
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     public int save(BotaderoRequestDto dto) {
-
-        boolean status = true;
 
         Botadero entity = new Botadero(
                 dto.id_botadero,
                 dto.city,
                 dto.property_name,
-                LocalDate.now(),
+                dto.create_date,
                 userRepository.findById(dto.user_id).orElse(null),
-                status
+                dto.status
         );
 
         botaderoRepository.save(entity);
@@ -78,25 +74,13 @@ public class BotaderoService implements IBotaderoService{
         Botadero bot = botadero.get();
 
         bot.setCity(dto.city);
-        bot.setCreate_date(botadero.get().create_date);
+        bot.setCreate_date(dto.create_date);
         bot.setStatus(dto.status);
         bot.setProperty_name(dto.property_name);
         bot.setUser_id(user.orElse(null));
         bot.setId_botadero(botadero.get().id_botadero);
 
         botaderoRepository.save(bot);
-
-        return true;
-    }
-
-    @Override
-    public boolean updateStatus(int id, boolean status) {
-
-        Botadero botadero = (botaderoRepository.findById(id)).get();
-
-        botadero.setStatus(status);
-
-        botaderoRepository.save(botadero);
 
         return true;
     }

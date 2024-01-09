@@ -1,16 +1,13 @@
 
 package com.agg.certificados.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.time.LocalDate;
+import java.util.Date;
 
 public class BotaderoRequestDto {
     public int id_botadero;
     public String city;
     public String property_name;
-    @JsonIgnore
-    public LocalDate create_date;
+    public Date create_date;
     public long user_id;
     public boolean status;
 
@@ -38,12 +35,11 @@ public class BotaderoRequestDto {
         this.property_name = property_name;
     }
 
-    public LocalDate getCreate_date() {
-        //return create_date;
-        return LocalDate.now();
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setCreate_date(LocalDate create_date) {
+    public void setCreate_date(Date create_date) {
         this.create_date = create_date;
     }
 
