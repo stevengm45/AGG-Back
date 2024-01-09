@@ -1,0 +1,429 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 2px;
+            position: relative;
+        }
+
+        th:first-child,
+        td:first-child {
+            width: 55%;
+        }
+
+        th {
+            border: 1.3px solid black;
+            text-align: left;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        td {
+            border: 1.3px solid black;
+            text-align: center;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        p,
+        h5 {
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .title {
+        }
+
+        p {
+            text-align: justify;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .content {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .titleCert {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .encabezado {
+            font-size: 9px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-left: 45px;
+        }
+
+        .footer p {
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .img-1 {
+            position: absolute;
+            top: 300px;
+            left: 10px;
+            width: 100%;
+            height: 50%;
+            object-fit: cover; /* Ajusta la imagen al tamaño de la celda */
+            opacity: 0.1; /* Ajusta la opacidad según tus necesidades (0 completamente transparente, 1 completamente opaco) */
+        }
+        .img-2 {
+            position: absolute;
+            top: 1000px;
+            left: 10px;
+            width: 100%;
+            height: 50%;
+            object-fit: cover; /* Ajusta la imagen al tamaño de la celda */
+            opacity: 0.1; /* Ajusta la opacidad según tus necesidades (0 completamente transparente, 1 completamente opaco) */
+        }
+
+    </style>
+</head>
+
+<body>
+<p class="encabezado">SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+    ALEJANDRO GARZÓN GUZMÁN <br></br>
+    NIT. 901191011-8
+</p>
+<div class="content">
+    <p style="text-align: center;">
+        <span class="titleCert" th:text="'CERTIFICACIÓN N° ' + ${certification.final_number_certification}"></span><br></br>
+        Disposición Final de Tierra y Material sobrante <br></br>
+        Realizada por el gestor SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+        ALEJANDRO GARZÓN GUZMÁN <br></br>
+        NIT 901191011-8
+    </p>
+
+    <table >
+        <tr>
+            <th class="title" colspan="3" style="text-align: center;">DATOS BÁSICOS DEL GESTOR</th>
+        </tr>
+        <tr>
+            <th>Número único asignado para el gestor por parte de la autoridad ambiental por proyecto</th>
+            <td colspan="2" th:text="${generator.data_manager.unic_number}"></td>
+        </tr>
+        <tr>
+            <th>Nombre o razón social</th>
+            <td colspan="2" th:text="${generator.data_manager.name}"></td>
+        </tr>
+        <tr>
+            <th>Documento de identificación o NIT</th>
+            <td colspan="2" th:text="${generator.data_manager.number_id}"></td>
+        </tr>
+        <tr>
+            <th>Representante legal</th>
+            <td colspan="2" th:text="${generator.data_manager.legal_representative}"></td>
+        </tr>
+        <!-- imagen -->
+
+        <img src="'@{image}'" alt="Imagen de fondo" class="img-1"></img>
+
+        <tr>
+            <th>Dirección</th>
+            <td colspan="2" th:text="${generator.data_manager.address}"></td>
+        </tr>
+        <tr>
+            <th>Teléfono</th>
+            <td colspan="2" th:text="${generator.data_manager.phone_number}"></td>
+        </tr>
+        <tr>
+            <th>Correo electrónico</th>
+            <td colspan="2" th:text="${generator.data_manager.email}"></td>
+        </tr>
+        <tr>
+            <th>Municipio o Distrito del predio</th>
+            <td colspan="2" th:text="${generator.botadero.city}"></td>
+        </tr>
+        <tr>
+            <th>Nombre del predio</th>
+            <td colspan="2" th:text="${generator.botadero.property_name}"></td>
+        </tr>
+        <tr>
+            <th rowspan="3">Gestor</th>
+            <td colspan="1">Punto limpio</td>
+            <td colspan="1">
+                    <span th:each="item : ${generator.manager}">
+                        <span th:if="${item.id_manager == 1}">
+                            <span>x</span>
+                        </span>
+                    </span>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Planta de aprovechamiento</td>
+
+            <td colspan="1">
+                    <span th:each="item : ${generator.manager}">
+                        <span th:if="${item.id_manager == 2}">
+                            <span>x</span>
+                        </span>
+                    </span>
+            </td>
+
+        </tr>
+        <tr>
+            <td>Disposición final</td>
+            <td colspan="1">
+                    <span th:each="item : ${generator.manager}">
+                        <span th:if="${item.id_manager == 3}">
+                            <span>x</span>
+                        </span>
+                    </span>
+            </td>
+
+        </tr>
+        <tr>
+            <th class="title" colspan="3" style="text-align: center;">DATOS BÁSICOS DEL GENERADOR</th>
+        </tr>
+        <tr>
+            <th>Número único asignado para el gestor por parte de la autoridad ambiental competente por proyecto
+            </th>
+            <td colspan="2" th:text="${generator.unic_number}"></td>
+        </tr>
+        <tr>
+            <th>Nombre o razón social</th>
+            <td colspan="2" th:text="${generator.name}"></td>
+        </tr>
+        <tr>
+            <th>Documento de identificación o NIT</th>
+            <td colspan="2" th:text="${generator.number_id}"></td>
+        </tr>
+        <tr>
+            <th>Representante legal</th>
+            <td colspan="2" th:text="${generator.legal_representative}"></td>
+        </tr>
+        <tr>
+            <th>Dirección domicilio</th>
+            <td colspan="2" th:text="${generator.address}"></td>
+        </tr>
+        <tr>
+            <th>Teléfono</th>
+            <td colspan="2" th:text="${generator.phone_number}"></td>
+        </tr>
+        <tr>
+            <th>Correo electrónico</th>
+            <td colspan="2" th:text="${generator.email}"></td>
+        </tr>
+        <tr>
+            <th>Dirección generación de RCD</th>
+            <td colspan="2" th:text="${generator.address_rcd}"></td>
+        </tr>
+
+        <tr>
+            <th class="title" colspan="3" style="text-align: center;">CANTIDADES DE RCD RECIBIDOS DEL GENERADOR POR
+                TIPO
+            </th>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: center;">Tipo de residuo</th>
+            <th colspan="2" style="text-align: center;">Cantidad de RCD recibidos del <br></br> generador (t)</th>
+        </tr>
+
+        <tr>
+            <th colspan="1" style="text-align: left;">1. Residuos de construcción y demolición - RCD susceptibles de
+                aprovechamiento:</th>
+            <td colspan="2">
+
+                <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 1}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                </span>
+
+
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="1" style="text-align: left;">1.1 Productos de excavación y sobrantes de la adecuación del
+                terreno: coberturas vegetales, tierras, limos y materiales pétreos productos de la excavación, entre
+                otros.</td>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 2}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">1.2 Productos de cimentaciones y pilotajes: arcillas,
+                bentonitas y
+                demás.</td>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 3}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+    </table>
+    <div class="footer" style="margin-top: 25px;">
+        <p>SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+            Calle 70 N.º 12B – 77 B / 7 de agosto Cali– Colombia  <br></br>
+            Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803 <br></br>
+            E. mail suministramosycontratamos@gmail.com-suministramosycontratamosagg@gmail.com
+        </p>
+    </div>
+    <p class="encabezado" style="margin-left: 7px;">SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+        ALEJANDRO GARZÓN GUZMÁN <br></br>
+        NIT. 901191011-8
+    </p>
+    <table >
+
+        <img src="'@{image}'" alt="Imagen de fondo" class="img-2"></img>
+
+        <tr>
+            <td colspan="1" style="text-align: left;">1.3 Pétreos: hormigón, arenas, gravas, gravillas, cantos,
+                pétreos
+                asfalticos, trozos de ladrillos y bloques, cerámicas,sobrantes de mezcla de cementos y concretos
+                hidráulicos, entre otros.</td>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 4}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">1.4 No pétreos: vidrio, metales como acero, hierro, cobre,
+                aluminio, con o sin recubrimiento de zinc o estaño, plásticos tales como: PVC, polietileno,
+                policarbonato, acrílico, espumas de poliestireno y de poliuretano, gomas y cauchos,
+                madera y compuestos de madera, cartón-yeso (drywall), entre otros.</td>
+            <td colspan="2">
+
+                <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 5}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                </span>
+
+            </td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">2. Residuos de construcción y demolición - RCD no susceptibles
+                de
+                aprovechamiento:</th>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 6}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">2.1 Los contaminados con residuos peligrosos.</td>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 7}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" style="text-align: left;">2.2. Los que por su estado no pueden ser aprovechados.</td>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 8}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="1" style="text-align: left;">2.3 Los que tengan características de peligrosidad, estos se
+                regirán por la normatividad ambiental especial establecida para su gestión.</td>
+            <td colspan="2">
+                    <span th:each="item : ${generator.quantitiesRcd}">
+                        <span th:if="${item.type_rcd.id_type_rcd == 9}">
+                            <span th:text="${item.quantity_rcd}"></span>
+                        </span>
+                    </span>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th colspan="1" style="text-align: left;">Total, RCD recibidos (t)</th>
+            <td colspan="2" th:text="${generator.total_rcd + ' TONELADAS'  }"></td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Fecha recepción de los RCD</th>
+            <td colspan="2" th:text="${generator.reception_date_rcd}"></td>
+        </tr>
+        <tr>
+            <th colspan="3" style="text-align: center;">DATOS BÁSICOS DEL GESTOR DE TRANSPORTE</th>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Nombre o razón social / Identificación</th>
+            <td colspan="2"
+                th:text="${generator.data_driver.name + ' ' + generator.data_driver.type_document.name + ' ' + generator.data_driver.number_id}">
+            </td>
+        </tr>
+        <tr>
+            <th colspan="1" style="text-align: left;">Placa de vehículo</th>
+            <td colspan="2" th:text="${generator.data_driver.vehicle_plate}"></td>
+        </tr>
+    </table>
+    <p>
+
+        La presente certificación se basa en el anexo II de la resolución 1257 del 2021 “Por la cual se modifica la
+        Resolución 0472 de 2017 sobre la gestión integral de Residuos de Construcción y Demolición – RCD y
+        se adoptan otras disposiciones” y se expide a solicitud del interesado, a los <span th:text="${certification_date}"></span>.
+        Para ser presentada ante la
+        autoridad Ambiental competente <strong>IMPORTANTE
+        PARA CONFIRMAR LA VERACIDAD DE ESTE CERTIFICADO COMUNÍQUESE CON NUESTRA OFICINA.</strong>
+        <br></br><br></br>
+        Se anexa certificado de calibración de la báscula utilizada para realizar el proceso de pesaje de los RCD
+        recibidos, como lo establece el marco normativo en su artículo 3 de la Resolución 1257 del 2021.
+        <br></br><br></br>
+        Quien certifica;
+    </p>
+    <br></br><br></br><br></br>
+    <br></br><br></br><br></br>
+    <br></br>
+    <p>
+        <strong>
+            ALEJANDRO GARZÓN GUZMÁN
+            <br></br>
+            Representante legal
+            <br></br>
+        </strong>
+        Suministramos y contratamos
+        <br></br>
+        <br></br>
+    </p>
+</div>
+
+<div class="footer">
+    <p>SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+        Calle 70 N.º 12B – 77 B / 7 de agosto Cali– Colombia  <br></br>
+        Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803 <br></br>
+        E. mail suministramosycontratamos@gmail.com-suministramosycontratamosagg@gmail.com
+    </p>
+</div>
+
+</body>
+
+</html>

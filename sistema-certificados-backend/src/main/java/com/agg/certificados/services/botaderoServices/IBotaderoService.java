@@ -1,7 +1,7 @@
 package com.agg.certificados.services.botaderoServices;
 
-import com.agg.certificados.dtos.BotaderoRequestDto;
-import com.agg.certificados.dtos.BotaderoResponseDto;
+import com.agg.certificados.dtos.request.BotaderoRequestDto;
+import com.agg.certificados.dtos.response.BotaderoResponseDto;
 import com.agg.certificados.entity.Botadero;
 
 import java.util.List;
