@@ -74,6 +74,21 @@ public class CertificationService implements ICertificationService {
 
         data.put("certification",certification);
 
+        int month = certification.create_date.getMonthValue();
+        int day = certification.create_date.getDayOfMonth();
+        int year = certification.create_date.getYear();
+
+        String date = day + " días del mes de " + MonthOfYear(month) + " del " + year;
+
+        data.put("certification_date",date);
+
+        String numeroFormateado = String.format("%03d", certification.number_certification);
+
+        data.put("number_certification",numeroFormateado);
+
+        String ruta_image = "/templates/logo.jpeg";
+        data.put("image",ruta_image);
+
         String certificateBotadero = generatePdfFile("certificacion-botadero",data,"Certificacion "+ certification.final_number_certification +".pdf");
 //        String certificateBotadero = generatePdfFile("certificacion-botadero",data,"Certificacion.pdf"); Hacer esto con las otras dos certificaciones
         String certificateBascula = generatePdfFile("certificacion-bascula",data,"CertificacionBascula "+ certification.final_number_certification +".pdf");
@@ -114,6 +129,48 @@ public class CertificationService implements ICertificationService {
                 String.format("%03d",certification.number_certification);
 
         return certification;
+    }
+
+    private String MonthOfYear(int number_month){
+
+        if (number_month == 1)
+            return "Enero";
+        else if (number_month == 2) {
+            return "Febrero";
+        }
+        else if (number_month == 3 ) {
+            return "Marzo";
+        }
+        else if (number_month == 4 ) {
+            return "Abril";
+        }
+        else if (number_month == 5 ) {
+            return "Mayo";
+        }
+        else if (number_month == 6) {
+            return "Junio";
+        }
+        else if (number_month == 7) {
+            return "Julio";
+        }
+        else if (number_month == 8 ) {
+            return "Agosto";
+        }
+        else if (number_month == 9) {
+            return "Septiembre";
+        }
+        else if (number_month == 10 ) {
+            return "Octubre";
+        }
+        else if (number_month == 11 ) {
+            return "Noviembre";
+        }
+        else if (number_month == 12) {
+            return "Diciembre";
+        }else {
+            return "";
+        }
+
     }
 
 }

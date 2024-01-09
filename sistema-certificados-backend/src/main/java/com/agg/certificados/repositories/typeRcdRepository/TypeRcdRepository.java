@@ -107,7 +107,7 @@ public class TypeRcdRepository implements ITypeRcdRepository{
 
     @Override
     public <S extends TypeRcd> List<S> saveAll(Iterable<S> entities) {
-        return null;
+        return saveAll(entities);
     }
 
     @Override

@@ -3,30 +3,9 @@
 
 <head>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th:first-child, td:first-child {
-            width: 55%;
-        }
-        th {
-            border: 1.3px solid black;
-            text-align: left;
-            font-size: 11px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        td {
-            border: 1.3px solid black;
-            text-align: center;
-            font-size: 11px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
         p,
         h5 {
-            font-size: 13px;
+            font-size: 15px;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -36,49 +15,83 @@
 
         p {
             text-align: justify;
-            font-size: 12px;
+            font-size: 15px;
             font-family: Arial, Helvetica, sans-serif;
         }
         body{
             margin-left: 50px;
             margin-right: 50px;
-            margin-bottom: 50px;
-            margin-top: 50px;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+        .encabezado {
+            font-size: 9px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-left: 0px;
+        }
+
+        .footer p {
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
-<p style="text-align: center;">CERTIFICACION N° 2023 - 005</p>
-<p style="text-align: center;">BASCULA RCD - AGG <br></br>
-
-    SUMINSTRAMOS Y CONTRATATAMOS AGG S.A.S <br></br>
-
-    ALEJANDRO GARZON G. <br></br>
-    NIT 901191011-8
+<p class="encabezado">SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+    ALEJANDRO GARZÓN GUZMÁN <br></br>
+    NIT. 901191011-8
 </p>
+<div>
 
-<br></br><br></br><br></br>
+    <p style="text-align: center;">
+        <br></br><br></br>
+        <span style="font-weight: bold;" th:text="'CERTIFICACIÓN N° ' + ${certification.final_number_certification}"> </span> <br></br>
+        BASCULA RCD - AGG <br></br>
 
-<p style="text-align: justify;">La presente para certificar que el señor: Freddy Agredo con CC. No. 4775472, se le
-    presto el servicio de báscula a la volqueta con placa QEN166 de la obra varias Cali -
-    Jamundí cantidad pesada: 313,6Toneladas, de disposición final de material, RCD
-    (Residuos de material construcción), De Octubre del 2023 según certificación de
-    disposición final RCD No. 005.
-    <br></br><br></br><br></br>
-    Se expide a solicitud del interesado, a los 09 días del mes de noviembre de 2023,
-    para ser presentada ante la autoridad ambiental competente. IMPORTANTE: Para
-    confirmar la veracidad de esta autorización comuníquese con nuestra oficina, al
-    número 3848023 o al celular 3165354803.
-    De antemano agradezco su amable atención.
+        SUMINSTRAMOS Y CONTRATATAMOS AGG S.A.S <br></br>
+
+        ALEJANDRO GARZÓN G. <br></br>
+        NIT 901191011-8
+    </p>
+
     <br></br><br></br>
-    De antemano agradezco su amable atención.
-    <br></br><br></br>
-    <br></br><br></br>
-    <br></br><br></br><br></br><br></br>
-    Atentamente,
-</p>
-<!-- Agregar firma imagen -->
+
+    <p style="text-align: justify;">La presente para certificar que el señor: <span th:text="${generator.data_driver.name}"> </span>
+        con <span th:text="${generator.data_driver.type_document.name}"></span>
+        No. <span th:text="${generator.data_driver.number_id}"></span>, se le
+        presto el servicio de báscula a la volqueta con
+        placa <span th:text="${generator.data_driver.vehicle_plate}"></span>
+        de las obras varias <span th:text="${generator.address_rcd}"></span>
+        cantidad pesada: <span th:text="${generator.total_rcd}"></span> Toneladas, de disposición final de material, RCD
+        (Residuos de material construcción),
+        De <span th:text="${generator.reception_date_rcd}"></span> según certificación de disposición final RCD No.
+        <span th:text="${number_certification}"></span>.
+
+
+        <br></br><br></br><br></br>
+        Se expide a solicitud del interesado, a los <span th:text="${certification_date}"></span>,
+        para ser presentada ante la autoridad ambiental competente. <em>IMPORTANTE: </em>Para
+        confirmar la veracidad de esta autorización comuníquese con nuestra oficina, <strong> al
+        número 3848023 o al celular 3165354803.</strong>
+        <br></br><br></br>
+        De antemano agradezco su amable atención.
+        <br></br><br></br><br></br>
+        <br></br><br></br><br></br>
+
+        Atentamente,
+        <br></br><br></br><br></br>
+        <br></br><br></br><br></br>
+        <br></br><br></br><br></br>
+    </p>
+
+</div>
+
 <p>
     <strong>
         ALEJANDRO GARZÓN GUZMÁN
@@ -89,15 +102,18 @@
     Gerente.
 </p>
 
-<br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<br></br><br></br><br></br>
+<br></br>
 
-<p style="text-align: center; font-size: 10px;">
-    SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S– Calle 70 N.º 12B – 77 B / 7 de agosto Cali – Colombia
-    <br></br>
-    Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803
-    <br></br>
-    Email suministramosycontratamos@gmail.com - suministramosycontratamosagg@gmail.com
-</p>
+
+<div class="footer">
+    <p>SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
+        Calle 70 N.º 12B – 77 B / 7 de agosto Cali– Colombia  <br></br>
+        Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803 <br></br>
+        E. mail suministramosycontratamos@gmail.com-suministramosycontratamosagg@gmail.com
+    </p>
+</div>
+
 </body>
 
 </html>

@@ -9,6 +9,7 @@ public class TypeRcd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id_type_rcd;
     public String name;
+    @Column(columnDefinition = "TEXT")
     public String description;
     public Boolean status;
 
