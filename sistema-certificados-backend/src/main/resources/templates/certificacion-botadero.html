@@ -74,27 +74,33 @@
         }
         .img-1 {
             position: absolute;
-            top: 300px;
+            top: 150px;
             left: 10px;
             width: 100%;
             height: 50%;
             object-fit: cover; /* Ajusta la imagen al tamaño de la celda */
             opacity: 0.1; /* Ajusta la opacidad según tus necesidades (0 completamente transparente, 1 completamente opaco) */
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.5); /* Color semitransparente (negro con 50% de opacidad) */
+
         }
         .img-2 {
             position: absolute;
-            top: 1000px;
+            top: 900px;
             left: 10px;
             width: 100%;
             height: 50%;
             object-fit: cover; /* Ajusta la imagen al tamaño de la celda */
             opacity: 0.1; /* Ajusta la opacidad según tus necesidades (0 completamente transparente, 1 completamente opaco) */
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.5); /* Color semitransparente (negro con 50% de opacidad) */
+
         }
 
     </style>
 </head>
 
-<body>
+<body th:background="@{static/images/logo.svg}">
 <p class="encabezado">SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
     ALEJANDRO GARZÓN GUZMÁN <br></br>
     NIT. 901191011-8
@@ -130,7 +136,7 @@
         </tr>
         <!-- imagen -->
 
-        <img src="'@{image}'" alt="Imagen de fondo" class="img-1"></img>
+        <img th:src="'data:image/jpeg;base64,' + ${image}" class="img-1" style="opacity: 0.1;"/>
 
         <tr>
             <th>Dirección</th>
@@ -182,7 +188,7 @@
             <td colspan="1">
                     <span th:each="item : ${generator.manager}">
                         <span th:if="${item.id_manager == 3}">
-                            <span>x</span>
+                            <span> x</span>
                         </span>
                     </span>
             </td>
@@ -274,8 +280,10 @@
                     </span>
             </td>
         </tr>
+        <img th:src="'data:image/jpeg;base64,' + ${image}" class="img-2"/>
+
     </table>
-    <div class="footer" style="margin-top: 25px;">
+    <div class="footer" style="margin-top: 0px;">
         <p>SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
             Calle 70 N.º 12B – 77 B / 7 de agosto Cali– Colombia  <br></br>
             Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803 <br></br>
@@ -287,9 +295,6 @@
         NIT. 901191011-8
     </p>
     <table >
-
-        <img src="'@{image}'" alt="Imagen de fondo" class="img-2"></img>
-
         <tr>
             <td colspan="1" style="text-align: left;">1.3 Pétreos: hormigón, arenas, gravas, gravillas, cantos,
                 pétreos
@@ -423,6 +428,7 @@
         E. mail suministramosycontratamos@gmail.com-suministramosycontratamosagg@gmail.com
     </p>
 </div>
+
 
 </body>
 

@@ -3,24 +3,26 @@ package com.agg.certificados.services.certificationServices.service;
 import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
 import com.agg.certificados.dtos.response.FileBase64ResponseDto;
 import com.agg.certificados.entity.Certification;
-import com.agg.certificados.repositories.certificationRepository.CertificationRepository;
 import com.agg.certificados.repositories.certificationRepository.ICertificationRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
-import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StreamUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+
 
 @Service
 public class CertificationService implements ICertificationService {
@@ -54,9 +56,7 @@ public class CertificationService implements ICertificationService {
             // Convertir el contenido del ByteArrayOutputStream a Base64
             byte[] pdfBytes = outputStream.toByteArray();
 
-            String base64String = Base64.getEncoder().encodeToString(pdfBytes);
-
-            return base64String;
+            return Base64.getEncoder().encodeToString(pdfBytes);
 
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -65,38 +65,29 @@ public class CertificationService implements ICertificationService {
     @Transactional
     public FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto){
 
-        //Mapeo de la informacion del generador y toda la relacionada a el
-        Map<String, Object> data = new HashMap<>();
-
-        data.put("generator",dto);
 
         Certification certification = createCertification(dto.id_data_generator);
+        Map<String, Object> data = MapeoDatos(dto, certification);
 
-        data.put("certification",certification);
+        //Mirar como convertir la img en base64
 
-        int month = certification.create_date.getMonthValue();
-        int day = certification.create_date.getDayOfMonth();
-        int year = certification.create_date.getYear();
+        String image;
 
-        String date = day + " días del mes de " + MonthOfYear(month) + " del " + year;
+        try {
+            image = loadImageAsBase64("/static/images/logo.png");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        data.put("image",image);
 
-        data.put("certification_date",date);
-
-        String numeroFormateado = String.format("%03d", certification.number_certification);
-
-        data.put("number_certification",numeroFormateado);
-
-        String ruta_image = "/templates/logo.jpeg";
-        data.put("image",ruta_image);
+        //-----------------------------------------------------------
 
         String certificateBotadero = generatePdfFile("certificacion-botadero",data,"Certificacion "+ certification.final_number_certification +".pdf");
 //        String certificateBotadero = generatePdfFile("certificacion-botadero",data,"Certificacion.pdf"); Hacer esto con las otras dos certificaciones
         String certificateBascula = generatePdfFile("certificacion-bascula",data,"CertificacionBascula "+ certification.final_number_certification +".pdf");
 
-
         certification.fileCertificateBotadero = certificateBotadero;
         certification.fileCertificateBascula = certificateBascula;
-        //certification.fileCertificateBascula = "certificateBascula";
 
         //Save certification
         certificationRepository.save(certification);
@@ -129,6 +120,22 @@ public class CertificationService implements ICertificationService {
                 String.format("%03d",certification.number_certification);
 
         return certification;
+    }
+
+    public Map<String,Object> MapeoDatos(DataGeneratorResponseDto dto, Certification certification){
+        //Mapeo de la informacion del generador y toda la relacionada a el
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("generator",dto);
+
+        data.put("certification",certification);
+
+        data.put("certification_date",DateFormat(certification));
+
+        String numeroFormateado = String.format("%03d", certification.number_certification);
+
+        data.put("number_certification",numeroFormateado);
+        return data;
     }
 
     private String MonthOfYear(int number_month){
@@ -172,5 +179,21 @@ public class CertificationService implements ICertificationService {
         }
 
     }
+
+    private String DateFormat(Certification certification){
+        int month = certification.create_date.getMonthValue();
+        int day = certification.create_date.getDayOfMonth();
+        int year = certification.create_date.getYear();
+
+        String date = day + " días del mes de " + MonthOfYear(month) + " del " + year;
+        return date;
+    }
+
+    public String loadImageAsBase64(String imagePath) throws IOException {
+        ClassPathResource resource = new ClassPathResource(imagePath);
+        byte[] imageBytes = StreamUtils.copyToByteArray(resource.getInputStream());
+        return Base64.getEncoder().encodeToString(imageBytes);
+    }
+
 
 }
