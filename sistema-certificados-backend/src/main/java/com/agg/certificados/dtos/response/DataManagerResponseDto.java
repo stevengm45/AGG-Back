@@ -10,6 +10,6 @@ public class DataManagerResponseDto {
     public String number_id;
     public String legal_representative;
     public String address;
-    public Long phone_number;
+    public String phone_number;
     public String email;
 }

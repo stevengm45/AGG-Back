@@ -27,49 +27,7 @@ public class CertificateController {
     @Autowired
     private IDataGeneratorService dataGeneratorService;
 
-    @GetMapping
-    public String pruebaCertifacte() {
 
-
-        Map<String, Object> data = new HashMap<>();
-        Botadero botadero = new Botadero();
-        botadero.setStatus(true);
-        botadero.setCity("Ciudad Tolima");
-        botadero.setProperty_name("Property Ibagué");
-        botadero.setId_botadero(1);
-
-        data.put("botadero", botadero);
-
-        List<Rol> roles = new ArrayList<>();
-        Rol rol1 = new Rol();
-
-        rol1.setRolName("Admin");
-        rol1.setRolId(1L);
-
-        Rol rol2 = new Rol();
-
-        rol2.setRolName("Prueba jeje");
-        rol2.setRolId(2L);
-
-        roles.add(rol1);
-        roles.add(rol2);
-
-        data.put("roles", roles);
-
-        //-------------
-        TypeDocument typeDocument = new TypeDocument(2,"Prueba de tipo documento",true,"TPD");
-
-        DataDriver dataDriver = new DataDriver();
-        dataDriver.type_document_id = typeDocument;
-
-        data.put("dataDriver", dataDriver);
-
-
-        //Se debe cambiar el nombre del TemplateName, para generar el archivo, ya que de acuerdo a eso asi mismo se genera
-
-        return certificateService.generatePdfFile("prueba",data,"prueba.pdf");
-
-    }
     @GetMapping("/{id}")
     public FileBase64ResponseDto generateCertificates(@PathVariable("id") Long idDataGenerator){
 

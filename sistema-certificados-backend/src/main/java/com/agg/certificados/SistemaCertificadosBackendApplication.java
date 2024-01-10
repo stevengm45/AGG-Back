@@ -4,6 +4,8 @@ package com.agg.certificados;
 
 import com.agg.certificados.entity.*;
 import com.agg.certificados.exceptions.UserFoundException;
+import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
+import com.agg.certificados.repositories.manager.IManagerRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.services.usersServices.UserService;
 
@@ -18,7 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -37,6 +41,12 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 	private ITypeDocumentRepository typeDocumentRepository;
 	@Autowired
 	private ITypeRcdRepository typeRcdRepository;
+
+	@Autowired
+	private IDataManagerRepository dataManagerRepository;
+
+	@Autowired
+	private IManagerRepository managerRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -99,7 +109,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //		typeRcd2.setDescription("Productos de excavación y sobrantes de la adecuación del terreno: coberturas vegetales, tierras, " +
 //				"limos y materiales pétreos productos de la excavación, entre otros.");
 //		typeRcdList.add(typeRcd2);
-
+//
 //		TypeRcd typeRcd3 = new TypeRcd();
 //		//typeRcd3.setId_type_rcd(3L);
 //		typeRcd3.setName("Productos de cimentaciones y pilotajes");
@@ -114,7 +124,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //		typeRcd4.setDescription("Pétreos: hormigón, arenas, gravas, gravillas, cantos, pétreos asfalticos, trozos de ladrillos y " +
 //				"bloques, cerámicas,sobrantes de mezcla de cementos y concretos hidráulicos, entre otros.");
 //		typeRcdList.add(typeRcd4);
-
+//
 //		TypeRcd typeRcd5 = new TypeRcd();
 //		//typeRcd5.setId_type_rcd(5L);
 //		typeRcd5.setName("No Pétreos");
@@ -154,6 +164,34 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //
 //		typeRcdRepository.saveAll(typeRcdList);
 
+//		Long id = 1L;
+//		DataManager dataManager = new DataManager();
+//		dataManager.setName("ALEJANDRO GARZON GUZMAN/SUMINISTRAMOS Y CONTRATAMOS AGG SAS");
+//		dataManager.setEmail("suministramosycontratamos@gmail.com");
+//		dataManager.setAddress("CALLE 70 # 12B – 77 SIETE DE AGOSTO (Oficina) ");
+//		dataManager.setNumber_id("901191011-8");
+//		dataManager.setPhone_number("3148095541 - (602) 3848023");
+//		dataManager.setLegal_representative("ALEJANDRO GARZÓN GUZMÁN");
+//		dataManager.setUnic_number("");
+//		dataManager.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//
+//		dataManagerRepository.save(dataManager);
+//
+//		Manager manager1 = new Manager();
+//		manager1.setName("Punto limpio");
+//		manager1.setStatus(true);
+//
+//		Manager manager2 = new Manager();
+//		manager2.setName("Planta de aprovechamiento");
+//		manager2.setStatus(true);
+//
+//		Manager manager3 = new Manager();
+//		manager3.setName("Disposición final");
+//		manager3.setStatus(true);
+//
+//		managerRepository.save(manager1);
+//		managerRepository.save(manager2);
+//		managerRepository.save(manager3);
 
 	}
 }

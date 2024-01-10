@@ -17,7 +17,7 @@ public class DataManager {
     public String number_id;
     public String legal_representative;
     public String address;
-    public Long phone_number;
+    public String phone_number;
     public String email;
 
     public Long getId_data_manager() {
@@ -76,11 +76,11 @@ public class DataManager {
         this.address = address;
     }
 
-    public Long getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(Long phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
