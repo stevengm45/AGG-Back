@@ -47,7 +47,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 	@Override
 	public void run(String... args) throws Exception {
-
+/*
 		try{
 			Set<TypeDocument> typeDocuments = new HashSet<>();
 			TypeDocument typeDocument = new TypeDocument();
@@ -82,7 +82,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 		} catch(UserFoundException e) {
 			e.printStackTrace();
 		}
-
+*/
 //		List<TypeRcd> typeRcdList = new ArrayList<>();
 //		TypeRcd typeRcd1 = new TypeRcd();
 //		typeRcd1.setId_type_rcd(1L);
