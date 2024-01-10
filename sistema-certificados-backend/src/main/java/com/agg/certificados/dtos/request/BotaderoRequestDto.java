@@ -1,13 +1,13 @@
 
 package com.agg.certificados.dtos.request;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BotaderoRequestDto {
     public int id_botadero;
     public String city;
     public String property_name;
-    public Date create_date;
     public long user_id;
     public boolean status;
 
@@ -35,13 +35,6 @@ public class BotaderoRequestDto {
         this.property_name = property_name;
     }
 
-    public Date getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
-    }
 
     public long getUser_id() {
         return user_id;

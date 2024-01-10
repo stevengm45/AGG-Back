@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class BotaderoService implements IBotaderoService{
                 dto.id_botadero,
                 dto.city,
                 dto.property_name,
-                dto.create_date,
+                LocalDate.now(),
                 userRepository.findById(dto.user_id).orElse(null),
                 dto.status
         );
@@ -80,7 +81,7 @@ public class BotaderoService implements IBotaderoService{
         Botadero bot = botadero.get();
 
         bot.setCity(dto.city);
-        bot.setCreate_date(dto.create_date);
+        bot.setCreate_date(botadero.get().create_date);
         bot.setStatus(dto.status);
         bot.setProperty_name(dto.property_name);
         bot.setUser_id(user.orElse(null));
