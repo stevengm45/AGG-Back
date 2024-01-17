@@ -1,9 +1,5 @@
 package com.agg.certificados.dtos.response;
 
-import com.agg.certificados.dtos.request.DataDriverRequestDto;
-import com.agg.certificados.dtos.request.QuantitiesRcdRequestDto;
-import javax.validation.constraints.NotNull;
-
 import java.util.List;
 
 public class DataGeneratorResponseDto {
@@ -24,5 +20,4 @@ public class DataGeneratorResponseDto {
     public Long total_rcd;
     public List<QuantitiesRcdResponseDto> quantitiesRcd;
     public DataDriverResponseDto data_driver;
-    public PriceRcdResponseDto price_rcd;
 }

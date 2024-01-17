@@ -65,18 +65,6 @@ public class MapStructMapper implements IMapStructMapper{
         return dto;
     }
 
-    @Override
-    public PriceRcdResponseDto PriceRcdToPriceRcdResponseDto(PriceRcd entity){
-
-        PriceRcdResponseDto dto = new PriceRcdResponseDto();
-
-        dto.price_m3 = entity.price_m3;
-        dto.total_price = entity.total_price;
-        dto.id_price_rcd = entity.id_price_rcd;
-
-        return dto;
-    }
-
 
     @Override
     public ManagerResponseDto ManagerToManagerResponseDto(Manager entity){

@@ -1,33 +1,18 @@
 package com.agg.certificados;
 
 
-
-import com.agg.certificados.entity.*;
-import com.agg.certificados.exceptions.UserFoundException;
 import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
 import com.agg.certificados.repositories.manager.IManagerRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
-import com.agg.certificados.services.usersServices.UserService;
-
 import com.agg.certificados.repositories.typeRcdRepository.ITypeRcdRepository;
-
+import com.agg.certificados.services.usersServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.agg.certificados.repositories")
@@ -57,42 +42,42 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 	@Override
 	public void run(String... args) throws Exception {
-/*
-		try{
-			Set<TypeDocument> typeDocuments = new HashSet<>();
-			TypeDocument typeDocument = new TypeDocument();
 
-			typeDocument.setName("CC");
-			typeDocument.setDescription("Cédula ciudadanía");
-			typeDocument.setStatus(true);
-			typeDocumentRepository.save(typeDocument);
-
-			User user = new User();
-
-			user.setFull_name("steven");
-			user.setUsername("steven");
-			user.setPassword(bCryptPasswordEncoder.encode("12345"));
-			user.setEmail("stevenl@gmail.com");
-			user.setType_document_id(typeDocument);
-			user.setNumber_id(77789898L);
-			user.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
-			Rol rol = new Rol();
-			rol.setRolId(1L);
-			rol.setRolName("ADMIN");
-
-			Set<UserRol> userRoles = new HashSet<>();
-			UserRol userRol = new UserRol();
-			userRol.setRol(rol);
-			userRol.setUser(user);
-			userRoles.add(userRol);
-
-
-			User userSaved = userService.saveUser(user, userRoles);
-			System.out.println(userSaved.getUsername());
-		} catch(UserFoundException e) {
-			e.printStackTrace();
-		}
-*/
+//		try{
+//			Set<TypeDocument> typeDocuments = new HashSet<>();
+//			TypeDocument typeDocument = new TypeDocument();
+//
+//			typeDocument.setName("CC");
+//			typeDocument.setDescription("Cédula ciudadanía");
+//			typeDocument.setStatus(true);
+//			typeDocumentRepository.save(typeDocument);
+//
+//			User user = new User();
+//
+//			user.setFull_name("steven");
+//			user.setUsername("steven");
+//			user.setPassword(bCryptPasswordEncoder.encode("12345"));
+//			user.setEmail("stevenl@gmail.com");
+//			user.setType_document_id(typeDocument);
+//			user.setNumber_id(77789898L);
+//			user.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+//			Rol rol = new Rol();
+//			rol.setRolId(1L);
+//			rol.setRolName("ADMIN");
+//
+//			Set<UserRol> userRoles = new HashSet<>();
+//			UserRol userRol = new UserRol();
+//			userRol.setRol(rol);
+//			userRol.setUser(user);
+//			userRoles.add(userRol);
+//
+//
+//			User userSaved = userService.saveUser(user, userRoles);
+//			System.out.println(userSaved.getUsername());
+//		} catch(UserFoundException e) {
+//			e.printStackTrace();
+//		}
+//
 //		List<TypeRcd> typeRcdList = new ArrayList<>();
 //		TypeRcd typeRcd1 = new TypeRcd();
 //		typeRcd1.setId_type_rcd(1L);
@@ -163,7 +148,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //		typeRcdList.add(typeRcd9);
 //
 //		typeRcdRepository.saveAll(typeRcdList);
-
+//
 //		Long id = 1L;
 //		DataManager dataManager = new DataManager();
 //		dataManager.setName("ALEJANDRO GARZON GUZMAN/SUMINISTRAMOS Y CONTRATAMOS AGG SAS");

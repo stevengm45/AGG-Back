@@ -1,10 +1,16 @@
 package com.agg.certificados.services.certificationServices.service;
 
+import com.agg.certificados.dtos.response.BandejaCertificacionesResponseDto;
 import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
 import com.agg.certificados.dtos.response.FileBase64ResponseDto;
 import com.agg.certificados.entity.Certification;
 import com.agg.certificados.repositories.certificationRepository.ICertificationRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +24,9 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -36,6 +41,30 @@ public class CertificationService implements ICertificationService {
     @Autowired
     private ICertificationRepository certificationRepository;
 
+    @Override
+    public List<BandejaCertificacionesResponseDto> getCertifications(String create_date,String number_certification, String number_id) {
+
+        List<Object[]> data = certificationRepository.getBandejaCertifications(create_date,number_certification, number_id);
+        List<BandejaCertificacionesResponseDto> bandeja = new ArrayList<>();
+        for (Object[] prueba : data) {
+
+            BandejaCertificacionesResponseDto dto = new BandejaCertificacionesResponseDto();
+            dto.id_certification = (BigInteger)prueba[0];
+            dto.number_certification = (String) prueba[1];
+            dto.create_date = (Date) prueba[2];
+            dto.name = (String) prueba[3];
+            dto.number_id = (String) prueba[4];
+            dto.file_certificate_botadero = (String) prueba[5];
+            dto.file_certificate_bascula = (String) prueba[6];
+
+            bandeja.add(dto);
+        }
+
+
+        return bandeja;
+
+
+    }
 
     @Override
     public String generatePdfFile(String templateName, Map<String, Object> data, String pdfFileName) {
@@ -68,6 +97,15 @@ public class CertificationService implements ICertificationService {
 
         Certification certification = createCertification(dto.id_data_generator);
         Map<String, Object> data = MapeoDatos(dto, certification);
+
+
+        //Llamar el base64 del qr
+        byte[] qrCode = generateQRCode(dto,100,100);
+        String qrcode = Base64.getEncoder().encodeToString(qrCode);
+
+        data.put("qrcode",qrcode);
+        //-----------------------
+
 
         //Mirar como convertir la img en base64
 
@@ -108,7 +146,7 @@ public class CertificationService implements ICertificationService {
         certification.data_generator_id = dataGeneratorRepository.findById(idDataGenerator).orElse(null);
 
         Long number_certification = certificationRepository
-                .findByMaxNumberCertification(idDataGenerator,LocalDate.now().getYear());
+                .findByMaxNumberCertification(LocalDate.now().getYear());
 
         if (number_certification == null) {
             certification.number_certification = 1L;
@@ -122,7 +160,22 @@ public class CertificationService implements ICertificationService {
         return certification;
     }
 
-    public Map<String,Object> MapeoDatos(DataGeneratorResponseDto dto, Certification certification){
+    public byte[] generateQRCode(DataGeneratorResponseDto qrContent, int width, int height) {
+        try {
+
+            //String json = new ObjectMapper().writeValueAsString(qrContent);
+            String json = "https://chat.openai.com/";
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWriter.encode(json, BarcodeFormat.QR_CODE, width, height);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            MatrixToImageWriter.writeToStream(bitMatrix, "PNG", byteArrayOutputStream);
+            return byteArrayOutputStream.toByteArray();
+        } catch (WriterException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Map<String,Object> MapeoDatos(DataGeneratorResponseDto dto, Certification certification){
         //Mapeo de la informacion del generador y toda la relacionada a el
         Map<String, Object> data = new HashMap<>();
 
@@ -137,6 +190,9 @@ public class CertificationService implements ICertificationService {
         data.put("number_certification",numeroFormateado);
         return data;
     }
+
+
+
 
     private String MonthOfYear(int number_month){
 
