@@ -1,15 +1,15 @@
 package com.agg.certificados.controllers;
 
 
+import com.agg.certificados.dtos.response.BandejaCertificacionesResponseDto;
 import com.agg.certificados.dtos.response.FileBase64ResponseDto;
 import com.agg.certificados.services.certificationServices.service.ICertificationService;
 import com.agg.certificados.services.dataGeneratorServices.IDataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
+
+import java.util.List;
 
 
 @RestController
@@ -27,6 +27,12 @@ public class CertificateController {
 
         return certificateService.generateCertificates(dataGeneratorService.getInformationCertificate(idDataGenerator));
     }
+    @GetMapping()
+    public List<BandejaCertificacionesResponseDto> getCertifications(@RequestParam(required = false) String create_date,
+                                                                     @RequestParam(required = false) String number_certification,
+                                                                     @RequestParam(required = false) String number_id ){
 
+        return certificateService.getCertifications(create_date,number_certification,number_id);
+    }
 
 }

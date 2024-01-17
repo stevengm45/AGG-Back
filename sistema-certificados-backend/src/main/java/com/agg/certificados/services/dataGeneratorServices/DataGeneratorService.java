@@ -4,7 +4,6 @@ import com.agg.certificados.dtos.request.DataGeneratorRequestDto;
 import com.agg.certificados.dtos.request.ManagerDataGeneratorRequestDto;
 import com.agg.certificados.dtos.request.QuantitiesRcdRequestDto;
 import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
-import com.agg.certificados.dtos.response.QuantitiesRcdResponseDto;
 import com.agg.certificados.entity.*;
 import com.agg.certificados.mapper.IMapStructMapper;
 import com.agg.certificados.repositories.botaderoRepository.IBotaderoRepository;
@@ -13,12 +12,10 @@ import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorR
 import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
 import com.agg.certificados.repositories.manager.IManagerRepository;
 import com.agg.certificados.repositories.managerDataGeneratorRepository.IManagerDataGeneratorRepository;
-import com.agg.certificados.repositories.priceRcdRepository.IPriceRcdRepository;
 import com.agg.certificados.repositories.quantitiesRcdRepository.IQuantitiesRcdRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.repositories.typeRcdRepository.ITypeRcdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,8 +42,6 @@ public class DataGeneratorService implements IDataGeneratorService{
     private ITypeRcdRepository typeRcdRepository;
     @Autowired
     private IManagerDataGeneratorRepository managerDataGeneratorRepository;
-    @Autowired
-    private IPriceRcdRepository priceRcdRepository;
 
     @Autowired
     private IMapStructMapper mapStructMapper;
@@ -101,13 +96,13 @@ public class DataGeneratorService implements IDataGeneratorService{
 
         }
 
-        //Price Rcd
-
-        PriceRcd priceRcd = new PriceRcd();
-
-        priceRcd.price_m3 = dto.price_rcd.price_m3;
-        priceRcd.data_generator_id = dataGenerator;
-        priceRcd.total_price = dto.price_rcd.total_price; //Crear el metodo para hacer el calculo del total, hacer la transformación de toneladas a metro cubico
+//        //Price Rcd
+//
+//        PriceRcd priceRcd = new PriceRcd();
+//
+//        priceRcd.price_m3 = dto.price_rcd.price_m3;
+//        priceRcd.data_generator_id = dataGenerator;
+//        priceRcd.total_price = dto.price_rcd.total_price; //Crear el metodo para hacer el calculo del total, hacer la transformación de toneladas a metro cubico
 
         dataGeneratorRepository.save(dataGenerator);
 
@@ -117,7 +112,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
         managerDataGeneratorRepository.saveAll(managerDataGenerators);
 
-        priceRcdRepository.save(priceRcd);
+//        priceRcdRepository.save(priceRcd);
 
         return dataGenerator.id_data_generator;
     }
@@ -133,12 +128,12 @@ public class DataGeneratorService implements IDataGeneratorService{
 
         List<ManagerDataGenerator> entitiesManagerDataGenerator = managerDataGeneratorRepository.findByIdDataGenerator(entityDataGenerator.id_data_generator);
 
-        PriceRcd entityPriceRcd = priceRcdRepository.findByIdDataGenerator(entityDataGenerator.id_data_generator);
+//        PriceRcd entityPriceRcd = priceRcdRepository.findByIdDataGenerator(entityDataGenerator.id_data_generator);
 
         DataGeneratorResponseDto dtoDataGenerator = mapStructMapper.DataGeneratorToDataGeneratorResponseDto(entityDataGenerator);
 
         //Price rcd
-        dtoDataGenerator.price_rcd = mapStructMapper.PriceRcdToPriceRcdResponseDto(entityPriceRcd);
+//        dtoDataGenerator.price_rcd = mapStructMapper.PriceRcdToPriceRcdResponseDto(entityPriceRcd);
 
         dtoDataGenerator.data_driver = mapStructMapper.DataDriverToDataDriverResponseDto(entityDataDriver);
         dtoDataGenerator.quantitiesRcd = new ArrayList<>();

@@ -1,8 +1,6 @@
 package com.agg.certificados.dtos.request;
 
-import com.agg.certificados.entity.ManagerDataGenerator;
 import javax.validation.constraints.NotNull;
-
 import java.util.List;
 
 public class DataGeneratorRequestDto {
@@ -35,6 +33,4 @@ public class DataGeneratorRequestDto {
     public List<QuantitiesRcdRequestDto> quantitiesRcd;
     @NotNull
     public DataDriverRequestDto data_driver;
-    @NotNull
-    public PriceRcdRequestDto price_rcd;
 }

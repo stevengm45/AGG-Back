@@ -1,7 +1,6 @@
 package com.agg.certificados.repositories.certificationRepository;
 
 import com.agg.certificados.entity.Certification;
-import javax.persistence.EntityNotFoundException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -9,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -144,7 +144,7 @@ public class CertificationRepository implements ICertificationRepository{
 
     @Override
     public <S extends Certification> List<S> findAll(Example<S> example) {
-        return null;
+        return findAll(example);
     }
 
     @Override
@@ -266,7 +266,7 @@ public class CertificationRepository implements ICertificationRepository{
      */
     @Override
     public List<Certification> findAll() {
-        return null;
+        return findAll();
     }
 
     /**
@@ -384,7 +384,12 @@ public class CertificationRepository implements ICertificationRepository{
     }
 
     @Override
-    public Long findByMaxNumberCertification(Long idDataGenerator, int anio) {
-        return findByMaxNumberCertification(idDataGenerator,anio);
+    public Long findByMaxNumberCertification(int anio) {
+        return findByMaxNumberCertification(anio);
+    }
+
+    @Override
+    public List<Object[]> getBandejaCertifications(String create_date, String number_certification, String number_id) {
+        return getBandejaCertifications(create_date, number_certification, number_id);
     }
 }
