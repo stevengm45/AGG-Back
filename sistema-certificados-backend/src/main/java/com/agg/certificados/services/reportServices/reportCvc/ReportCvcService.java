@@ -2,9 +2,11 @@ package com.agg.certificados.services.reportServices.reportCvc;
 
 import com.agg.certificados.dtos.request.ReportCvcRequestDto;
 import com.agg.certificados.dtos.response.ReportCvcResponseDto;
+import com.agg.certificados.dtos.response.ReportResponseDto;
 import com.agg.certificados.entity.DataGenerator;
 import com.agg.certificados.entity.ManagerDataGenerator;
 import com.agg.certificados.entity.QuantitiesRcd;
+import com.agg.certificados.repositories.botaderoRepository.IBotaderoRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
 import com.agg.certificados.repositories.managerDataGeneratorRepository.IManagerDataGeneratorRepository;
 import com.agg.certificados.repositories.quantitiesRcdRepository.IQuantitiesRcdRepository;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -30,19 +33,20 @@ public class ReportCvcService implements IReportCvcService{
 
     @Autowired
     private IManagerDataGeneratorRepository managerDataGeneratorRepository;
+    @Autowired
+    private IBotaderoRepository botaderoRepository;
 
+    public ReportResponseDto setData(ReportCvcRequestDto dto){
 
-
-
-
-    public String setData(ReportCvcRequestDto dto){
+        dto.start_date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        dto.end_date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet("Hoja 1");
 
         columnWith(sheet);
 
-        title(sheet,dto.start_date,dto.end_date,wb);
+        title(sheet,dto.start_date.toString(),dto.end_date.toString(),wb);
         header(sheet, wb);
 
         List<ReportCvcResponseDto> lista = setRowData(dto);
@@ -57,7 +61,15 @@ public class ReportCvcService implements IReportCvcService{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return Base64.getEncoder().encodeToString(array);
+        String fileName = "Reporte Cvc " + botaderoRepository.findById(dto.id_botadero).get().city +
+                " - " + botaderoRepository.findById(dto.id_botadero).get().property_name + " (" + dto.start_date + " - " + dto.end_date + ")";
+
+        ReportResponseDto dtoResponse = new ReportResponseDto();
+        dtoResponse.fileBase64 = Base64.getEncoder().encodeToString(array);
+
+        dtoResponse.name = fileName;
+
+        return dtoResponse;
     }
 
     public void insertData(Sheet sheet, List<ReportCvcResponseDto> lista, Workbook wb){
@@ -152,7 +164,7 @@ public class ReportCvcService implements IReportCvcService{
     }
 
     public List<ReportCvcResponseDto> setRowData(ReportCvcRequestDto dto){
-        List<DataGenerator> data = dataGeneratorRepository.getbyIdBotadero(dto.id_botadero, dto.start_date, dto.end_date);
+        List<DataGenerator> data = dataGeneratorRepository.getbyIdBotadero(dto.id_botadero, dto.start_date.toString(), dto.end_date.toString());
 
         List<ReportCvcResponseDto> listReportDto = new ArrayList<>();
         for (DataGenerator item: data){

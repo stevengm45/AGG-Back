@@ -1,6 +1,8 @@
 package com.agg.certificados;
 
 
+import com.agg.certificados.entity.*;
+import com.agg.certificados.exceptions.UserFoundException;
 import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
 import com.agg.certificados.repositories.manager.IManagerRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
@@ -13,6 +15,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.agg.certificados.repositories")

@@ -1,8 +1,9 @@
 package com.agg.certificados.services.reportServices.reportCvc;
 
 import com.agg.certificados.dtos.request.ReportCvcRequestDto;
+import com.agg.certificados.dtos.response.ReportResponseDto;
 
 public interface IReportCvcService {
-    String setData(ReportCvcRequestDto dto);
+    ReportResponseDto setData(ReportCvcRequestDto dto);
 
 }
