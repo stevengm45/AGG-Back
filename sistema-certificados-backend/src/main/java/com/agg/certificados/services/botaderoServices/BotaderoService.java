@@ -64,6 +64,29 @@ public class BotaderoService implements IBotaderoService{
         return listDto;
     }
 
+    public List<BotaderoResponseDto> getAllActive(){
+        List<Botadero> entities = botaderoRepository.findAll();
+
+        List<BotaderoResponseDto> listDto = new ArrayList<>();
+
+        for (Botadero entity:entities) {
+
+            if (entity.status == true){
+
+                //Obtiene el usuario
+                Optional<User> user = userRepository.findById(entity.getUser_id().getId());
+
+                //Setea el usuario
+                entity.setUser_id(user.orElse(null));
+
+                //Agrega a la lista
+                listDto.add(new BotaderoResponseDto(entity));
+            }
+
+        }
+
+        return listDto;
+    }
 
     public boolean delete(int id) {
         botaderoRepository.deleteById(id);
@@ -89,6 +112,25 @@ public class BotaderoService implements IBotaderoService{
 
         botaderoRepository.save(bot);
 
+        return true;
+    }
+
+    @Override
+    public boolean updateStatus(boolean status, int id) {
+        Optional<Botadero> botadero = botaderoRepository.findById(id);
+        Optional<User> user = userRepository.findById(botadero.get().user_id.getId());
+
+
+        Botadero bot = botadero.get();
+
+        bot.setCity(botadero.get().city);
+        bot.setCreate_date(botadero.get().create_date);
+        bot.setStatus(status);
+        bot.setProperty_name(bot.getProperty_name());
+        bot.setUser_id(user.orElse(null));
+        bot.setId_botadero(botadero.get().id_botadero);
+
+        botaderoRepository.save(bot);
         return true;
     }
 

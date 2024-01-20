@@ -169,4 +169,9 @@ public class DataGeneratorRepository implements IDataGeneratorRepository{
     public Page<DataGenerator> findAll(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public List<DataGenerator> getbyIdBotadero(int id, String start_date, String end_date) {
+        return getbyIdBotadero(id, start_date, end_date);
+    }
 }

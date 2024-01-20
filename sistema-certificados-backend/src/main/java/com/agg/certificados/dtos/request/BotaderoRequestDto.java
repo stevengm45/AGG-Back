@@ -1,14 +1,26 @@
 
 package com.agg.certificados.dtos.request;
 
-import java.time.LocalDate;
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class BotaderoRequestDto {
+
     public int id_botadero;
+    @NotNull
+    @NotEmpty
+    @NotBlank
+
     public String city;
+    @NotNull
+    @NotEmpty
+    @NotBlank
+
     public String property_name;
+
     public long user_id;
+
     public boolean status;
 
     public int getId_botadero() {

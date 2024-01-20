@@ -20,6 +20,6 @@ public class DataGeneratorController {
     }
     @GetMapping("/{idDataGenerator}")
     public DataGeneratorResponseDto getById(@PathVariable("idDataGenerator") Long idDataGenerator){
-        return dataGeneratorService.getInformationCertificate(idDataGenerator);
+        return dataGeneratorService.getInformationGetCertificate(idDataGenerator);
     }
 }

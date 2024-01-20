@@ -14,5 +14,7 @@ public interface IBotaderoService {
     int save(BotaderoRequestDto dto);
     boolean delete(int id);
     boolean update(BotaderoRequestDto dto,int id);
+    boolean updateStatus(boolean status,int id);
+    List<BotaderoResponseDto> getAllActive();
 
 }

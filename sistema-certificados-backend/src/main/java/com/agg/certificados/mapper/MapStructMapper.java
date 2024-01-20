@@ -132,5 +132,14 @@ public class MapStructMapper implements IMapStructMapper{
 
     }
 
+    @Override
+    public CertificationMiniResponseDto CertificationToCertificationMiniResponseDto(Certification certification){
+        CertificationMiniResponseDto dto = new CertificationMiniResponseDto();
+        dto.create_date = certification.create_date;
+        dto.id_certification = certification.id_certification;
+        dto.final_number_certification = certification.final_number_certification;
+        dto.number_certification = certification.number_certification;
+        return dto;
+    }
 
 }

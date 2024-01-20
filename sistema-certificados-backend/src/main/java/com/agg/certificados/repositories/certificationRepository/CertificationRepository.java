@@ -392,4 +392,9 @@ public class CertificationRepository implements ICertificationRepository{
     public List<Object[]> getBandejaCertifications(String create_date, String number_certification, String number_id) {
         return getBandejaCertifications(create_date, number_certification, number_id);
     }
+
+    @Override
+    public Certification findByIdDataGenerator(Long id) {
+        return findByIdDataGenerator(id);
+    }
 }

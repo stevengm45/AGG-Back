@@ -7,6 +7,7 @@ import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
 import com.agg.certificados.entity.*;
 import com.agg.certificados.mapper.IMapStructMapper;
 import com.agg.certificados.repositories.botaderoRepository.IBotaderoRepository;
+import com.agg.certificados.repositories.certificationRepository.ICertificationRepository;
 import com.agg.certificados.repositories.dataDriverRepository.IDataDriverRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
 import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
@@ -42,6 +43,9 @@ public class DataGeneratorService implements IDataGeneratorService{
     private ITypeRcdRepository typeRcdRepository;
     @Autowired
     private IManagerDataGeneratorRepository managerDataGeneratorRepository;
+
+    @Autowired
+    private ICertificationRepository certificationRepository;
 
     @Autowired
     private IMapStructMapper mapStructMapper;
@@ -115,6 +119,14 @@ public class DataGeneratorService implements IDataGeneratorService{
 //        priceRcdRepository.save(priceRcd);
 
         return dataGenerator.id_data_generator;
+    }
+
+    @Transactional
+    public DataGeneratorResponseDto getInformationGetCertificate(Long idDataGenerator){
+        DataGeneratorResponseDto dto = getInformationCertificate(idDataGenerator);
+        dto.certification = mapStructMapper.CertificationToCertificationMiniResponseDto(certificationRepository.findByIdDataGenerator(idDataGenerator));
+
+        return dto;
     }
 
     @Transactional

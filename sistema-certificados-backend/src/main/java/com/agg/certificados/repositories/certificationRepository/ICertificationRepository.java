@@ -14,4 +14,7 @@ public interface ICertificationRepository extends JpaRepository<Certification,Lo
     List<Object[]> getBandejaCertifications(@Nullable String create_date,
                                             @Nullable String number_certification,
                                             @Nullable String number_id);
+    @Query(value = "SELECT c.* FROM certification AS c WHERE c.data_generator_id = :id",nativeQuery = true)
+
+    Certification findByIdDataGenerator(Long id);
 }

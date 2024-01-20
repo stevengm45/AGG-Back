@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class BotaderoController {
     private IBotaderoService botaderoService;
 
     @PostMapping
-    public ResponseEntity<Integer> saveBotadero(@RequestBody BotaderoRequestDto dto) {
+    public ResponseEntity<Integer> saveBotadero(@Valid @RequestBody BotaderoRequestDto dto) {
         return ResponseEntity.ok(botaderoService.save(dto));
     }
 
@@ -45,6 +46,11 @@ public class BotaderoController {
         return ResponseEntity.ok(botaderoService.getAll());
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<List<BotaderoResponseDto>> getAllActiveBotaderos() {
+        return ResponseEntity.ok(botaderoService.getAllActive());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteBotadero(@PathVariable("id") int id) {
         return ResponseEntity.ok(botaderoService.delete(id));
@@ -54,7 +60,8 @@ public class BotaderoController {
     public ResponseEntity<Boolean> updateBotadero(@RequestBody BotaderoRequestDto dto,@PathVariable("id") int id) {
         return ResponseEntity.ok(botaderoService.update(dto,id));
     }
-
-
-
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Boolean> updateStatusBotadero(@RequestBody boolean status,@PathVariable("id") int id) {
+        return ResponseEntity.ok(botaderoService.updateStatus(status,id));
+    }
 }

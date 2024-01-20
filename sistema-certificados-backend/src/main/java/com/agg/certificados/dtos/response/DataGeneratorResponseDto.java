@@ -20,4 +20,5 @@ public class DataGeneratorResponseDto {
     public Long total_rcd;
     public List<QuantitiesRcdResponseDto> quantitiesRcd;
     public DataDriverResponseDto data_driver;
+    public CertificationMiniResponseDto certification;
 }
