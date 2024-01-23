@@ -134,6 +134,7 @@ public class CertificationService implements ICertificationService {
         dtoResponse.fileCertificateBotadero = certificateBotadero;
         dtoResponse.fileCertificateBascula = certificateBascula;
         dtoResponse.fileBascula = "Falta mapear";
+        dtoResponse.number_final_certification = certification.final_number_certification;
 
         return dtoResponse;
 

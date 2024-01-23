@@ -17,6 +17,16 @@ public class QuantitiesRcd {
     public DataGenerator data_generator_id;
     public Long quantity_rcd;
 
+    public QuantitiesRcd() {
+    }
+
+    public QuantitiesRcd(Long id_quantities_rcd, TypeRcd type_rcd_id, DataGenerator data_generator_id, Long quantity_rcd) {
+        this.id_quantities_rcd = id_quantities_rcd;
+        this.type_rcd_id = type_rcd_id;
+        this.data_generator_id = data_generator_id;
+        this.quantity_rcd = quantity_rcd;
+    }
+
     public Long getId_quantities_rcd() {
         return id_quantities_rcd;
     }

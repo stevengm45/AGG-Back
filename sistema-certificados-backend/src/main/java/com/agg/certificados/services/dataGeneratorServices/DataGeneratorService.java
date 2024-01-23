@@ -1,7 +1,6 @@
 package com.agg.certificados.services.dataGeneratorServices;
 
 import com.agg.certificados.dtos.request.DataGeneratorRequestDto;
-import com.agg.certificados.dtos.request.ManagerDataGeneratorRequestDto;
 import com.agg.certificados.dtos.request.QuantitiesRcdRequestDto;
 import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
 import com.agg.certificados.entity.*;
@@ -16,6 +15,8 @@ import com.agg.certificados.repositories.managerDataGeneratorRepository.IManager
 import com.agg.certificados.repositories.quantitiesRcdRepository.IQuantitiesRcdRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.repositories.typeRcdRepository.ITypeRcdRepository;
+import com.agg.certificados.utils.ManagerEnum;
+import com.agg.certificados.utils.TypeRcdEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,7 +68,8 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataGenerator.setPhone_number(dto.phone_number);
         dataGenerator.setEmail(dto.email);
         dataGenerator.setAddress_rcd(dto.address_rcd);
-        dataGenerator.setTotal_rcd(dto.quantitiesRcd.stream().mapToLong(value -> value.quantity_rcd).sum()); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
+
+        dataGenerator.setTotal_rcd(dto.quantitiesRcd.total); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
 
         dataGenerator.setReception_date_rcd(dto.reception_date_rcd);
 
@@ -81,32 +83,27 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataDriver.setData_generator_id(dataGenerator);
 
         //Quantities
-        List<QuantitiesRcd> quantities = new ArrayList<>();
 
-        for(QuantitiesRcdRequestDto item : dto.quantitiesRcd){
 
-            quantities.add(mapStructMapper.QuantitiesRcdRequestDtoToQuantitiesRcd(item, dataGenerator));
+        List<QuantitiesRcd> quantities = quantitiesRcd(dto.quantitiesRcd.quantities,dataGenerator);
 
-        }
 
         //Manager data generator, de muchos a muchos
         List<ManagerDataGenerator> managerDataGenerators = new ArrayList<>();
 
-        for(ManagerDataGeneratorRequestDto item: dto.manager){
-
-            managerDataGenerators.add(
-                    new ManagerDataGenerator(0L,managerRepository.findById(item.manager_id).orElse(null),dataGenerator)
-            );
-
+        //Manager
+        if (dto.manager.manager_id_1){
+            Manager manager_1 = managerRepository.findById(ManagerEnum.PuntoLimpio.getNumberId()).orElse(null);
+            managerDataGenerators.add(new ManagerDataGenerator(0L,manager_1,dataGenerator));
         }
-
-//        //Price Rcd
-//
-//        PriceRcd priceRcd = new PriceRcd();
-//
-//        priceRcd.price_m3 = dto.price_rcd.price_m3;
-//        priceRcd.data_generator_id = dataGenerator;
-//        priceRcd.total_price = dto.price_rcd.total_price; //Crear el metodo para hacer el calculo del total, hacer la transformación de toneladas a metro cubico
+        if (dto.manager.manager_id_2) {
+            Manager manager_2 = managerRepository.findById(ManagerEnum.Aprovechamiento.getNumberId()).orElse(null);
+            managerDataGenerators.add(new ManagerDataGenerator(0L,manager_2,dataGenerator));
+        }
+        if (dto.manager.manager_id_3) {
+            Manager manager_3 = managerRepository.findById(ManagerEnum.DisposicionFinal.getNumberId()).orElse(null);
+            managerDataGenerators.add(new ManagerDataGenerator(0L,manager_3,dataGenerator));
+        }
 
         dataGeneratorRepository.save(dataGenerator);
 
@@ -116,9 +113,50 @@ public class DataGeneratorService implements IDataGeneratorService{
 
         managerDataGeneratorRepository.saveAll(managerDataGenerators);
 
-//        priceRcdRepository.save(priceRcd);
-
         return dataGenerator.id_data_generator;
+    }
+
+    private List<QuantitiesRcd> quantitiesRcd(QuantitiesRcdRequestDto quantities, DataGenerator dataGenerator){
+        List<QuantitiesRcd> quantitiesList = new ArrayList<>();
+
+        if (quantities.quantity_rcd_1 >0){
+
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.Uno.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_1));
+
+        }
+        if (quantities.quantity_rcd_2 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.UnoUno.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_2));
+
+        }
+        if (quantities.quantity_rcd_3 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.UnoDos.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_3));
+
+        }
+        if (quantities.quantity_rcd_4 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.UnoTres.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_4));
+
+        }
+        if (quantities.quantity_rcd_5 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.UnoCuatro.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_5));
+
+        }
+        if (quantities.quantity_rcd_6 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.Dos.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_6));
+
+        }
+        if (quantities.quantity_rcd_7 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.DosUno.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_7));
+
+        }
+        if (quantities.quantity_rcd_8 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.DosDos.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_8));
+
+        }
+        if (quantities.quantity_rcd_9 >0) {
+            quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.DosTres.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_9));
+
+        }
+        return quantitiesList;
     }
 
     @Transactional

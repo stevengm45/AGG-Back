@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/generator")
 public class DataGeneratorController {
@@ -14,7 +16,7 @@ public class DataGeneratorController {
     private IDataGeneratorService dataGeneratorService;
 
     @PostMapping
-    public ResponseEntity<Long> saveDataGenerator(@RequestBody DataGeneratorRequestDto dto) {
+    public ResponseEntity<Long> saveDataGenerator(@Valid @RequestBody DataGeneratorRequestDto dto) {
 
         return ResponseEntity.ok(dataGeneratorService.save(dto));
     }

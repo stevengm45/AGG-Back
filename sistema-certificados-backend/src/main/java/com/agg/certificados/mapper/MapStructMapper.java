@@ -17,8 +17,8 @@ public class MapStructMapper implements IMapStructMapper{
 
         QuantitiesRcd entity = new QuantitiesRcd();
 
-        entity.setQuantity_rcd(dto.quantity_rcd);
-        entity.setType_rcd_id(typeRcdRepository.findById(dto.type_rcd_id).orElse(null));
+//        entity.setQuantity_rcd(dto.quantity_rcd);
+//        entity.setType_rcd_id(typeRcdRepository.findById(dto.type_rcd_id).orElse(null));
         entity.setData_generator_id(dataGenerator);
         return entity;
     }
