@@ -61,6 +61,13 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //			typeDocument.setStatus(true);
 //			typeDocumentRepository.save(typeDocument);
 //
+//			TypeDocument typeDocumentsNit = new TypeDocument();
+//
+//			typeDocumentsNit.setName("NIT");
+//			typeDocumentsNit.setDescription("NIT");
+//			typeDocumentsNit.setStatus(true);
+//			typeDocumentRepository.save(typeDocumentsNit);
+//
 //			User user = new User();
 //
 //			user.setFull_name("steven");
@@ -160,16 +167,53 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //
 //		Long id = 1L;
 //		DataManager dataManager = new DataManager();
-//		dataManager.setName("ALEJANDRO GARZON GUZMAN/SUMINISTRAMOS Y CONTRATAMOS AGG SAS");
+//		dataManager.setName("SUMINISTRAMOS Y CONTRATAMOS AGG SAS");
 //		dataManager.setEmail("suministramosycontratamos@gmail.com");
 //		dataManager.setAddress("CALLE 70 # 12B – 77 SIETE DE AGOSTO (Oficina) ");
 //		dataManager.setNumber_id("901191011-8");
 //		dataManager.setPhone_number("3148095541 - (602) 3848023");
 //		dataManager.setLegal_representative("ALEJANDRO GARZÓN GUZMÁN");
 //		dataManager.setUnic_number("");
-//		dataManager.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//		dataManager.setType_document_id(typeDocumentRepository.findById(2L).orElse(null));
 //
 //		dataManagerRepository.save(dataManager);
+//
+//		DataManager dataManager2 = new DataManager();
+//		dataManager2.setName("LINA PAOLA ROJAS GUZMAN");
+//		dataManager2.setEmail("linarojitas@hotmail.com");
+//		dataManager2.setAddress("CALLE 88 #20a - 56");
+//		dataManager2.setNumber_id("1.110.465.056");
+//		dataManager2.setPhone_number("3167448482");
+//		dataManager2.setLegal_representative("LINA PAOLA ROJAS GUZMAN");
+//		dataManager2.setUnic_number("");
+//		dataManager2.setType_document_id(typeDocumentRepository.findById(1l).orElse(null));
+//
+//		dataManagerRepository.save(dataManager2);
+//
+//		DataManager dataManager3 = new DataManager();
+//		dataManager3.setName("FABIOLA ASPRILLA CACERES");
+//		dataManager3.setEmail("fabiola23@gmail.com");
+//		dataManager3.setAddress("CALLE 90 # 16-57");
+//		dataManager3.setNumber_id("31.880.147");
+//		dataManager3.setPhone_number("3167978987");
+//		dataManager3.setLegal_representative("FABIOLA ASPRILLA CACERES");
+//		dataManager3.setUnic_number("");
+//		dataManager3.setType_document_id(typeDocumentRepository.findById(1l).orElse(null));
+//
+//		dataManagerRepository.save(dataManager3);
+//
+//		DataManager dataManager4 = new DataManager();
+//		dataManager4.setName("ALEJANDRO GARZON GUZMAN");
+//		dataManager4.setEmail("suministramosycontratamos@gmail.com");
+//		dataManager4.setAddress("CALLE 70 # 12B – 77 SIETE DE AGOSTO (Oficina) ");
+//		dataManager4.setNumber_id("79.308.043");
+//		dataManager4.setPhone_number("3148095541 - (602) 3848023");
+//		dataManager4.setLegal_representative("ALEJANDRO GARZÓN GUZMÁN");
+//		dataManager4.setUnic_number("");
+//		dataManager4.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//
+//		dataManagerRepository.save(dataManager4);
+//
 //
 //		Manager manager1 = new Manager();
 //		manager1.setName("Punto limpio");

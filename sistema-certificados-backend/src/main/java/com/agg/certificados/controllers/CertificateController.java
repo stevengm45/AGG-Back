@@ -25,8 +25,8 @@ public class CertificateController {
 
     @GetMapping("/{id}")
     public FileBase64ResponseDto generateCertificates(@PathVariable("id") Long idDataGenerator){
-
-        return certificateService.generateCertificates(dataGeneratorService.getInformationCertificate(idDataGenerator));
+        //Se le pone true, por que es una certificacion nueva
+        return certificateService.generateCertificates(dataGeneratorService.getInformationCertificate(idDataGenerator),true);
     }
     @GetMapping()
     public List<BandejaCertificacionesResponseDto> getCertifications(@RequestParam(required = false) String create_date,

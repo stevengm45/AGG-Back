@@ -1,6 +1,8 @@
 package com.agg.certificados.controllers;
 
+import com.agg.certificados.dtos.request.BotaderoRequestDto;
 import com.agg.certificados.dtos.request.DataGeneratorRequestDto;
+import com.agg.certificados.dtos.response.DataGeneratorEditResponseDto;
 import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
 import com.agg.certificados.services.dataGeneratorServices.IDataGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,15 @@ public class DataGeneratorController {
     @GetMapping("/{idDataGenerator}")
     public DataGeneratorResponseDto getById(@PathVariable("idDataGenerator") Long idDataGenerator){
         return dataGeneratorService.getInformationGetCertificate(idDataGenerator);
+    }
+
+    @GetMapping("/{id}/edit")
+    public DataGeneratorEditResponseDto getByIdEdit(@PathVariable("id") Long idCertification){
+        return dataGeneratorService.getByIdEdit(idCertification);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> updateDataGenerator(@RequestBody DataGeneratorRequestDto dto, @PathVariable("id") Long idCertification) {
+        return ResponseEntity.ok(dataGeneratorService.editDataGenerator(idCertification,dto));
     }
 }

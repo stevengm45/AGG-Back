@@ -387,4 +387,10 @@ public class ManagerDataGeneratorRepository implements IManagerDataGeneratorRepo
     public List<ManagerDataGenerator> findByIdDataGenerator(Long idDataGenerator) {
         return findByIdDataGenerator(idDataGenerator);
     }
+
+    @Override
+    public boolean deleteByIdDataGenerator(Long idDataGenerator) {
+        deleteByIdDataGenerator(idDataGenerator);
+        return true;
+    }
 }

@@ -169,4 +169,5 @@ public class ManagerRepository implements IManagerRepository{
     public Page<Manager> findAll(Pageable pageable) {
         return null;
     }
+
 }

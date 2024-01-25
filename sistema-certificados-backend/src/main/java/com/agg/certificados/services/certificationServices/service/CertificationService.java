@@ -101,10 +101,10 @@ public class CertificationService implements ICertificationService {
         }
     }
     @Transactional
-    public FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto){
+    public FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto, boolean isNew){
 
 
-        Certification certification = createCertification(dto.id_data_generator);
+        Certification certification = createCertification(dto.id_data_generator,isNew);
         Map<String, Object> data = MapeoDatos(dto, certification);
 
 
@@ -154,25 +154,31 @@ public class CertificationService implements ICertificationService {
 
     }
 
-    public Certification createCertification(Long idDataGenerator){
-        Certification certification = new Certification();
+    public Certification createCertification(Long idDataGenerator, boolean isNew){
+        if (isNew){
+            Certification certification = new Certification();
 
-        certification.create_date = LocalDate.now();
-        certification.data_generator_id = dataGeneratorRepository.findById(idDataGenerator).orElse(null);
+            certification.create_date = LocalDate.now();
+            certification.data_generator_id = dataGeneratorRepository.findById(idDataGenerator).orElse(null);
 
-        Long number_certification = certificationRepository
-                .findByMaxNumberCertification(LocalDate.now().getYear());
+            Long number_certification = certificationRepository
+                    .findByMaxNumberCertification(LocalDate.now().getYear());
 
-        if (number_certification == null) {
-            certification.number_certification = 1L;
+            if (number_certification == null) {
+                certification.number_certification = 1L;
+            }else{
+                certification.number_certification = number_certification + 1L;
+            }
+
+            certification.final_number_certification =  String.valueOf(certification.create_date.getYear()) + "-" +
+                    String.format("%03d",certification.number_certification);
+
+            return certification;
         }else{
-            certification.number_certification = number_certification + 1L;
+            Certification certification = certificationRepository.findByIdDataGenerator(idDataGenerator);
+            return certification;
         }
 
-        certification.final_number_certification =  String.valueOf(certification.create_date.getYear()) + "-" +
-                String.format("%03d",certification.number_certification);
-
-        return certification;
     }
 
     public byte[] generateQRCode(DataGeneratorResponseDto qrContent, int width, int height) {

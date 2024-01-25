@@ -7,6 +7,6 @@ public class DataDriverRequestDto {
     public Long data_generator_id;
     public String name;
     public Long type_document_id;
-    public Long number_id;
+    public String number_id;
     public String vehicle_plate;
 }

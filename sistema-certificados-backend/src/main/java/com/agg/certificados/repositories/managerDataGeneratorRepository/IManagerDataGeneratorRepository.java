@@ -9,4 +9,6 @@ import java.util.List;
 public interface IManagerDataGeneratorRepository extends JpaRepository<ManagerDataGenerator, Long> {
     @Query(value = "SELECT m.* FROM manager_data_generator AS m WHERE m.data_generator_id = :idDataGenerator",nativeQuery = true)
     List<ManagerDataGenerator> findByIdDataGenerator(Long idDataGenerator);
+    @Query(value = "delete from manager_data_generator where data_generator_id = :idDataGenerator", nativeQuery = true)
+    boolean deleteByIdDataGenerator(Long idDataGenerator);
 }

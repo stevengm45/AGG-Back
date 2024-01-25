@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface ICertificationService {
     String generatePdfFile(String templateName, Map<String, Object> data, String pdfFileName);
-    FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto);
+    FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto,boolean isNew);
     List<BandejaCertificacionesResponseDto> getCertifications(@Nullable String create_date,
                                                               @Nullable String number_certification,
                                                               @Nullable String number_id);

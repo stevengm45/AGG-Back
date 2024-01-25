@@ -15,13 +15,13 @@ public class DataDriver {
     @ManyToOne
     @JoinColumn(name = "type_document_id")
     public TypeDocument type_document_id;
-    public Long number_id;
+    public String number_id;
     public String vehicle_plate;
 
     public DataDriver() {
     }
 
-    public DataDriver(Long id_data_driver, DataGenerator data_generator_id, String name, TypeDocument type_document_id, Long number_id, String vehicle_plate) {
+    public DataDriver(Long id_data_driver, DataGenerator data_generator_id, String name, TypeDocument type_document_id, String number_id, String vehicle_plate) {
         this.id_data_driver = id_data_driver;
         this.data_generator_id = data_generator_id;
         this.name = name;
@@ -62,11 +62,11 @@ public class DataDriver {
         this.type_document_id = type_document_id;
     }
 
-    public Long getNumber_id() {
+    public String getNumber_id() {
         return number_id;
     }
 
-    public void setNumber_id(Long number_id) {
+    public void setNumber_id(String number_id) {
         this.number_id = number_id;
     }
 
