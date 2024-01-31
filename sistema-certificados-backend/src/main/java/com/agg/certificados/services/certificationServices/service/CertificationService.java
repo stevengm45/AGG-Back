@@ -25,6 +25,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 
@@ -155,7 +157,16 @@ public class CertificationService implements ICertificationService {
         if (isNew){
             Certification certification = new Certification();
 
-            certification.create_date = LocalDate.now();
+            LocalDate fechaActual = LocalDate.now();
+
+            LocalTime horaActual = LocalTime.now();
+
+            LocalDateTime fechaHoraActual = LocalDateTime.of(fechaActual, horaActual);
+
+            LocalDateTime fechaReducida = fechaHoraActual.minusHours(4);
+
+            certification.create_date = fechaReducida.toLocalDate();
+
             certification.data_generator_id = dataGeneratorRepository.findById(idDataGenerator).orElse(null);
 
             Long number_certification = certificationRepository
