@@ -1,8 +1,7 @@
 package com.agg.certificados;
 
 
-import com.agg.certificados.entity.*;
-import com.agg.certificados.exceptions.UserFoundException;
+import com.agg.certificados.repositories.RolRepository;
 import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
 import com.agg.certificados.repositories.manager.IManagerRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
@@ -16,13 +15,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.agg.certificados.repositories")
 @EntityScan(basePackages = "com.agg.certificados.entity")
@@ -30,6 +22,9 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private RolRepository rolRepository;
 
 	@Autowired
 	private ITypeDocumentRepository typeDocumentRepository;
@@ -52,6 +47,28 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 	@Override
 	public void run(String... args) throws Exception {
 
+//		User user = new User();
+//
+//			user.setFull_name("Administrador");
+//			user.setUsername("admin");
+//			user.setPassword(bCryptPasswordEncoder.encode("admin*2024"));
+//			user.setEmail("");
+//			user.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//			user.setNumber_id(0L);
+//			user.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+////			Rol rol = new Rol();
+////			rol.setRolId(1L);
+////			rol.setRolName("ADMIN");
+//
+//			Set<UserRol> userRoles = new HashSet<>();
+//			UserRol userRol = new UserRol();
+//			userRol.setRol(rolRepository.findById(1L).orElse(null));
+//			userRol.setUser(user);
+//			userRoles.add(userRol);
+//
+//
+//			User userSaved = userService.saveUser(user, userRoles);
+
 //		try{
 //			Set<TypeDocument> typeDocuments = new HashSet<>();
 //			TypeDocument typeDocument = new TypeDocument();
@@ -72,7 +89,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //
 //			user.setFull_name("steven");
 //			user.setUsername("steven");
-//			user.setPassword(bCryptPasswordEncoder.encode("12345"));
+//			user.setPassword(bCryptPasswordEncoder.encode("admin*2024"));
 //			user.setEmail("stevenl@gmail.com");
 //			user.setType_document_id(typeDocument);
 //			user.setNumber_id(77789898L);

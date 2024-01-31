@@ -6,13 +6,6 @@ import com.agg.certificados.dtos.response.FileBase64ResponseDto;
 import com.agg.certificados.entity.Certification;
 import com.agg.certificados.repositories.certificationRepository.ICertificationRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
-import com.aspose.pdf.Document;
-import com.aspose.pdf.HorizontalAlignment;
-import com.aspose.pdf.VerticalAlignment;
-import com.aspose.pdf.WatermarkArtifact;
-import com.aspose.pdf.facades.EncodingType;
-import com.aspose.pdf.facades.FontStyle;
-import com.aspose.pdf.facades.FormattedText;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -22,9 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StreamUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -33,8 +24,6 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -100,7 +89,7 @@ public class CertificationService implements ICertificationService {
             throw new RuntimeException(e.getMessage());
         }
     }
-    @Transactional
+    //@Transactional
     public FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto, boolean isNew){
 
 
@@ -109,7 +98,7 @@ public class CertificationService implements ICertificationService {
 
 
         //Llamar el base64 del qr
-        byte[] qrCode = generateQRCode(dto,100,100);
+        byte[] qrCode = generateQRCode(dto,100,100,dto.id_data_generator);
         String qrcode = Base64.getEncoder().encodeToString(qrCode);
 
         data.put("qrcode",qrcode);
@@ -133,8 +122,15 @@ public class CertificationService implements ICertificationService {
         String certificateBotadero = generatePdfFile("certificacion-botadero",data,"Certificacion "+ certification.final_number_certification +".pdf");
         String certificateBascula = generatePdfFile("certificacion-bascula",data,"CertificacionBascula "+ certification.final_number_certification +".pdf");
         String certificateCalibracionbascula="";
+//        try {
+//            certificateCalibracionbascula = waterMark(certification.final_number_certification);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+
         try {
-            certificateCalibracionbascula = waterMark(certification.final_number_certification);
+            certificateCalibracionbascula = loadImageAsBase64("/templates/calibracion-bascula.pdf");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -182,11 +178,11 @@ public class CertificationService implements ICertificationService {
 
     }
 
-    public byte[] generateQRCode(DataGeneratorResponseDto qrContent, int width, int height) {
+    public byte[] generateQRCode(DataGeneratorResponseDto qrContent, int width, int height, Long idDataGenerator) {
         try {
 
             //String json = new ObjectMapper().writeValueAsString(qrContent);
-            String json = "https://chat.openai.com/";
+            String json = "https://suministramosycontratamosagg.com/certification/"+idDataGenerator;
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(json, BarcodeFormat.QR_CODE, width, height);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -270,43 +266,62 @@ public class CertificationService implements ICertificationService {
         return Base64.getEncoder().encodeToString(imageBytes);
     }
 
-    private String waterMark(String final_number_certification) throws IOException {
-
-        String path = "templates/calibracion-bascula.pdf";
-        // Obtener el recurso del archivo PDF
-        Resource resource = new ClassPathResource(path);
-
-        // Leer el contenido del archivo PDF como un arreglo de bytes
-        byte[] pdfBytes = Files.readAllBytes(Path.of(resource.getURI()));
-
-
-
-// Load PDF document
-        Document doc = new Document(pdfBytes);
-
-// Create a formatted text
-        FormattedText formattedText = new FormattedText("Certificacion N° "+final_number_certification, java.awt.Color.RED, FontStyle.Courier, EncodingType.Identity_h, true, 25.0F);
-
-// Create watermark artifact and set its properties
-        WatermarkArtifact artifact = new WatermarkArtifact();
-        artifact.setText(formattedText);
-        artifact.setArtifactHorizontalAlignment (HorizontalAlignment.Center);
-        artifact.setArtifactVerticalAlignment (VerticalAlignment.Center);
-        artifact.setRotation (25);
-        artifact.setOpacity (0.5);
-        artifact.setBackground (false);
-
-// Add watermark to the first page of PDF
-        doc.getPages().get_Item(1).getArtifacts().add(artifact);
-        doc.getPages().get_Item(2).getArtifacts().add(artifact);
-        doc.getPages().get_Item(3).getArtifacts().add(artifact);
-        doc.getPages().get_Item(4).getArtifacts().add(artifact);
-
-
-// Save watermarked PDF document
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        doc.save(byteArrayOutputStream);
-
-        return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
-    }
+//    private String waterMark(String final_number_certification) throws Exception {
+//        String path = "templates/";
+//
+//        Document doc = new Document("calibracion-bascula.pdf");
+//
+//        OutputStream outputStream = new ByteArrayOutputStream();;
+//        doc.save(outputStream, SaveOptions.createSaveOptions(1));
+//
+//        TextWatermarkOptions options = new TextWatermarkOptions();
+//        options.setFontFamily("Arial");
+//        options.setFontSize(36);
+//        options.setColor(Color.BLACK);
+//        options.setLayout(WatermarkLayout.HORIZONTAL);
+//        options.isSemitrasparent(false);
+//
+//        byte[] bytes = new byte[0];
+//
+//        outputStream.write(bytes);
+//
+//        doc.getWatermark().setText("Test", options);
+//
+////        doc.save(dataDir + "AddTextWatermark_out.docx");
+//
+//
+//        // Obtener el recurso del archivo PDF
+//        Resource resource = new ClassPathResource(path);
+//
+//        // Leer el contenido del archivo PDF como un arreglo de bytes
+//        byte[] pdfBytes = Files.readAllBytes(Path.of(resource.getURI()));
+//
+//// Load PDF document
+////        Document doc = new Document(pdfBytes);
+////
+////// Create a formatted text
+////        FormattedText formattedText = new FormattedText("Certificacion N° "+final_number_certification, Color.RED, FontStyle.Courier, EncodingType.Identity_h, true, 25.0F);
+////
+////// Create watermark artifact and set its properties
+////        WatermarkArtifact artifact = new WatermarkArtifact();
+////        artifact.setText(formattedText);
+////        artifact.setArtifactHorizontalAlignment (HorizontalAlignment.Center);
+////        artifact.setArtifactVerticalAlignment (VerticalAlignment.Center);
+////        artifact.setRotation (25);
+////        artifact.setOpacity (0.5);
+////        artifact.setBackground (false);
+////
+////// Add watermark to the first page of PDF
+////        doc.getPages().get_Item(1).getArtifacts().add(artifact);
+////        doc.getPages().get_Item(2).getArtifacts().add(artifact);
+////        doc.getPages().get_Item(3).getArtifacts().add(artifact);
+////        doc.getPages().get_Item(4).getArtifacts().add(artifact);
+////
+////
+////// Save watermarked PDF document
+////        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+////        doc.save(byteArrayOutputStream);
+//
+////        return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
+//    }
 }

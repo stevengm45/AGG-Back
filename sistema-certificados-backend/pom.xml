@@ -14,7 +14,7 @@
 	<name>sistema-certificados-backend</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -168,19 +168,26 @@
 
 		<dependency>
 			<groupId>com.aspose</groupId>
-			<artifactId>aspose-pdf</artifactId>
-			<version>23.12</version>
+			<artifactId>aspose-words</artifactId>
+			<version>22.11</version>
+			<classifier>jdk17</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.aspose</groupId>
+			<artifactId>aspose-words</artifactId>
+			<version>22.11</version>
+			<classifier>javadoc</classifier>
 		</dependency>
 
 	</dependencies>
 	<repositories>
 		<!-- Agrega tu repositorio aquí -->
+
 		<repository>
 			<id>AsposeJavaAPI</id>
 			<name>Aspose Java API</name>
-			<url>https://repository.aspose.com/repo/</url>
+			<url>https://releases.aspose.com/java/repo/</url>
 		</repository>
-
 	</repositories>
 	<build>
 		<plugins>
@@ -193,6 +200,15 @@
 					</image>
 				</configuration>
 			</plugin>
+			<!--<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>-->
+
 		</plugins>
 	</build>
 

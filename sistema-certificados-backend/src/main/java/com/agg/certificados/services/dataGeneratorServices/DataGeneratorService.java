@@ -311,7 +311,7 @@ public class DataGeneratorService implements IDataGeneratorService{
         return dto;
     }
 
-    @Transactional
+    //@Transactional
     public DataGeneratorResponseDto getInformationCertificate(Long idDataGenerator){
 
         DataGenerator entityDataGenerator = dataGeneratorRepository.findById(idDataGenerator).orElse(null);
