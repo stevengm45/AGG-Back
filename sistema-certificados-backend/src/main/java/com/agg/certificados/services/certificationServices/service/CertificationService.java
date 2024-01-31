@@ -190,6 +190,7 @@ public class CertificationService implements ICertificationService {
             return byteArrayOutputStream.toByteArray();
         } catch (WriterException | IOException e) {
             throw new RuntimeException(e);
+
         }
     }
 
