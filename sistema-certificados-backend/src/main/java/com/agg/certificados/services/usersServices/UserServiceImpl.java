@@ -33,6 +33,13 @@ public class UserServiceImpl implements UserService {
             user.getUserRoles().addAll(userRoles);
             userLocal = userRepository.save(user);
         }
+//
+//        for (UserRol userRol:userRoles) {
+//            rolRepository.save(userRol.getRol());
+//        }
+//        user.getUserRoles().addAll(userRoles);
+//        userLocal = userRepository.save(user);
+
         return userLocal;
     }
 
