@@ -47,27 +47,6 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 	@Override
 	public void run(String... args) throws Exception {
 
-//		User user = new User();
-//
-//			user.setFull_name("Administrador");
-//			user.setUsername("admin");
-//			user.setPassword(bCryptPasswordEncoder.encode("admin*2024"));
-//			user.setEmail("");
-//			user.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
-//			user.setNumber_id(0L);
-//			user.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
-////			Rol rol = new Rol();
-////			rol.setRolId(1L);
-////			rol.setRolName("ADMIN");
-//
-//			Set<UserRol> userRoles = new HashSet<>();
-//			UserRol userRol = new UserRol();
-//			userRol.setRol(rolRepository.findById(1L).orElse(null));
-//			userRol.setUser(user);
-//			userRoles.add(userRol);
-//
-//
-//			User userSaved = userService.saveUser(user, userRoles);
 
 //		try{
 //			Set<TypeDocument> typeDocuments = new HashSet<>();
@@ -84,29 +63,86 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 //			typeDocumentsNit.setDescription("NIT");
 //			typeDocumentsNit.setStatus(true);
 //			typeDocumentRepository.save(typeDocumentsNit);
-//
-//			User user = new User();
-//
-//			user.setFull_name("steven");
-//			user.setUsername("steven");
-//			user.setPassword(bCryptPasswordEncoder.encode("admin*2024"));
-//			user.setEmail("stevenl@gmail.com");
-//			user.setType_document_id(typeDocument);
-//			user.setNumber_id(77789898L);
-//			user.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+
 //			Rol rol = new Rol();
 //			rol.setRolId(1L);
 //			rol.setRolName("ADMIN");
 //
+//			rolRepository.save(rol);
+//
+//			User user1 = new User();
+//
+//			user1.setFull_name("Administrador");
+//			user1.setUsername("admin");
+//			user1.setPassword(bCryptPasswordEncoder.encode("admin*2024"));
+//			user1.setEmail("");
+//			user1.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//			user1.setNumber_id(0L);
+//			user1.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+//
 //			Set<UserRol> userRoles = new HashSet<>();
-//			UserRol userRol = new UserRol();
-//			userRol.setRol(rol);
-//			userRol.setUser(user);
-//			userRoles.add(userRol);
+//			UserRol userRol1 = new UserRol();
+//			userRol1.setRol(rol);
+//			userRol1.setUser(user1);
+//			userRoles.add(userRol1);
+//
+//			User saveUser = userService.saveUser(user1, userRoles);
 //
 //
-//			User userSaved = userService.saveUser(user, userRoles);
-//			System.out.println(userSaved.getUsername());
+//			User user2 = new User();
+//
+//			user2.setFull_name("Fabiola Asprilla Caceres");
+//			user2.setUsername("fabiola.asprilla");
+//			user2.setPassword(bCryptPasswordEncoder.encode("Fasprilla*2024"));
+//			user2.setEmail("Suministramosycontratamos@gmail.com");
+//			user2.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//			user2.setNumber_id(31880147L);
+//			user2.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+//
+//
+//			Set<UserRol> userRoles2 = new HashSet<>();
+//			UserRol userRol2 = new UserRol();
+//			userRol2.setRol(rol);
+//			userRol2.setUser(user2);
+//			userRoles2.add(userRol2);
+//			userService.saveUser(user2, userRoles2);
+//
+//			User user3 = new User();
+//
+//			user3.setFull_name("Carolina Diaz Rivera");
+//			user3.setUsername("carolina.diaz");
+//			user3.setPassword(bCryptPasswordEncoder.encode("Cdiaz*2024"));
+//			user3.setEmail("Suministramosycontratamos@gmail.com");
+//			user3.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//			user3.setNumber_id(31571893L);
+//			user3.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+//
+//
+//			Set<UserRol> userRoles3 = new HashSet<>();
+//			UserRol userRol3 = new UserRol();
+//			userRol3.setRol(rol);
+//			userRol3.setUser(user3);
+//			userRoles3.add(userRol3);
+//			userService.saveUser(user3, userRoles3);
+//
+//			User user4 = new User();
+//
+//			user4.setFull_name("Monica Yoreli Rodriguez");
+//			user4.setUsername("monica.rodriguez");
+//			user4.setPassword(bCryptPasswordEncoder.encode("Mrodriguez*2024"));
+//			user4.setEmail("Suministramosycontratamos@gmail.com");
+//			user4.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
+//			user4.setNumber_id(1143977626L);
+//			user4.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
+//
+//
+//			Set<UserRol> userRoles4 = new HashSet<>();
+//			UserRol userRol4 = new UserRol();
+//			userRol4.setRol(rol);
+//			userRol4.setUser(user4);
+//			userRoles4.add(userRol4);
+//			userService.saveUser(user4, userRoles4);
+//
 //		} catch(UserFoundException e) {
 //			e.printStackTrace();
 //		}
