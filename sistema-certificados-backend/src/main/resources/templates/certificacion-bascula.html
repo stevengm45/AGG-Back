@@ -25,14 +25,31 @@
             margin-top: 15px;
         }
         .encabezado {
-            font-size: 9px;
+            font-size: 14px;
             font-family: Arial, Helvetica, sans-serif;
             font-style: italic;
             font-weight: bold;
             margin-top: 5px;
-            margin-left: 0px;
+            margin-left: 30px;
+            color: darkblue;
+            opacity: 0.5;
         }
+        .img-1 {
+            position: absolute;
+            top: 150px;
+            left: 10px;
+            width: 100%;
+            height: 50%;
+            object-fit: cover; /* Ajusta la imagen al tamaño de la celda */
+            opacity: 0.1; /* Ajusta la opacidad según tus necesidades (0 completamente transparente, 1 completamente opaco) */
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.5); /* Color semitransparente (negro con 50% de opacidad) */
 
+        }
+        .email{
+            color: darkblue;
+            text-decoration: underline;
+        }
         .footer p {
             text-align: center;
             font-size: 10px;
@@ -61,6 +78,7 @@
     </p>
 
     <br></br><br></br>
+    <img th:src="'data:image/jpeg;base64,' + ${image}" class="img-1" style="opacity: 0.1;"/>
 
     <p style="text-align: justify;">La presente para certificar que el señor: <span th:text="${generator.data_driver.name}"> </span>
         con <span th:text="${generator.data_driver.type_document.name}"></span>
@@ -68,8 +86,7 @@
         presto el servicio de báscula a la volqueta con
         placa <span th:text="${generator.data_driver.vehicle_plate}"></span>
         de las obras varias <span th:text="${generator.address_rcd}"></span>
-        cantidad pesada: <span th:text="${generator.total_rcd}"></span> Toneladas, de disposición final de material, RCD
-        (Residuos de material construcción),
+        cantidad pesada: <span th:text="${quantitiespesaje}"></span>
         De <span th:text="${generator.reception_date_rcd}"></span> según certificación de disposición final RCD No.
         <span th:text="${number_certification}"></span>.
 
@@ -108,9 +125,8 @@
 
 <div class="footer">
     <p>SUMINISTRAMOS Y CONTRATAMOS AGG S.A.S <br></br>
-        Calle 70 N.º 12B – 77 B / 7 de agosto Cali– Colombia  <br></br>
-        Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803 <br></br>
-        E. mail suministramosycontratamos@gmail.com-suministramosycontratamosagg@gmail.com
+        Calle 70 N.º 12B – 77 B / 7 de agosto Cali– Colombia Tel (602) 3848023 – Cel 314 809 5541 – 316 535 4803 <br></br>
+        E. mail <span class="email">suministramosycontratamos@gmail.com-suministramosycontratamosagg@gmail.com</span>
     </p>
 </div>
 
