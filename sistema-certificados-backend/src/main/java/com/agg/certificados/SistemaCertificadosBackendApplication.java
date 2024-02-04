@@ -8,6 +8,7 @@ import com.agg.certificados.repositories.dataManager.IDataManagerRepository;
 import com.agg.certificados.repositories.manager.IManagerRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.repositories.typeRcdRepository.ITypeRcdRepository;
+import com.agg.certificados.repositories.typeWeightRepository.ITypeWeightRepository;
 import com.agg.certificados.services.usersServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -37,6 +38,9 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 	@Autowired
 	private ITypeDocumentRepository typeDocumentRepository;
+
+	@Autowired
+	private ITypeWeightRepository typeWeightRepository;
 	@Autowired
 	private ITypeRcdRepository typeRcdRepository;
 
@@ -72,6 +76,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 			typeDocumentsNit.setDescription("NIT");
 			typeDocumentsNit.setStatus(true);
 			typeDocumentRepository.save(typeDocumentsNit);
+
 			Rol rol = new Rol();
 			rol.setRolId(1L);
 			rol.setRolName("ADMIN");
@@ -154,6 +159,22 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 		} catch(UserFoundException e) {
 			e.printStackTrace();
 		}
+
+
+		Set<TypeWeight> typeWeights = new HashSet<>();
+		TypeWeight typeWeight = new TypeWeight();
+
+		typeWeight.setName("TN");
+		typeWeight.setDescription("Toneladas");
+		typeWeight.setStatus(true);
+		typeWeightRepository.save(typeWeight);
+
+		TypeWeight typeWeightKl = new TypeWeight();
+
+		typeWeightKl.setName("KL");
+		typeWeightKl.setDescription("Kilos");
+		typeWeightKl.setStatus(true);
+		typeWeightRepository.save(typeWeightKl);
 
 		List<TypeRcd> typeRcdList = new ArrayList<>();
 		TypeRcd typeRcd1 = new TypeRcd();

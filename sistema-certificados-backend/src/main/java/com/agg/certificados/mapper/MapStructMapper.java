@@ -223,4 +223,9 @@ public class MapStructMapper implements IMapStructMapper{
     public BotaderoResponseDto BotaderoToBotaderoResponseDto(Botadero entity){
         return new BotaderoResponseDto(entity);
     }
+
+    @Override
+    public TypeWeightResponseDto TypeWeightToTypeWeightResponseDto(TypeWeight entity) {
+        return null;
+    }
 }
