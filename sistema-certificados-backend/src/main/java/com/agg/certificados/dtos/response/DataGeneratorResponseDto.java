@@ -17,6 +17,7 @@ public class DataGeneratorResponseDto {
     public String email;
     public String address_rcd;
     public String reception_date_rcd;
+    public TypeWeightResponseDto type_weight;
     public Long total_rcd;
     public List<QuantitiesRcdResponseDto> quantitiesRcd;
     public DataDriverResponseDto data_driver;

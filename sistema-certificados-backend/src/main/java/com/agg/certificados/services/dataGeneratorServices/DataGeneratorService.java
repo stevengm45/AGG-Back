@@ -16,6 +16,7 @@ import com.agg.certificados.repositories.managerDataGeneratorRepository.IManager
 import com.agg.certificados.repositories.quantitiesRcdRepository.IQuantitiesRcdRepository;
 import com.agg.certificados.repositories.typeDocumentRepository.ITypeDocumentRepository;
 import com.agg.certificados.repositories.typeRcdRepository.ITypeRcdRepository;
+import com.agg.certificados.repositories.typeWeightRepository.ITypeWeightRepository;
 import com.agg.certificados.services.certificationServices.service.ICertificationService;
 import com.agg.certificados.utils.ManagerEnum;
 import com.agg.certificados.utils.TypeRcdEnum;
@@ -36,6 +37,9 @@ public class DataGeneratorService implements IDataGeneratorService{
     private IBotaderoRepository botaderoRepository;
     @Autowired
     private ITypeDocumentRepository typeDocumentRepository;
+
+    @Autowired
+    private ITypeWeightRepository typeWeightRepository;
     @Autowired
     private IManagerRepository managerRepository;
     @Autowired
@@ -67,6 +71,8 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataGenerator.setName(dto.name);
         dataGenerator.setType_document_id(typeDocumentRepository.findById(dto.type_document_id).orElse(null));
         dataGenerator.setNumber_id(dto.number_id);
+
+        dataGenerator.setType_weight_id(typeWeightRepository.findById(dto.type_weight_id).orElse(null));
 
         dataGenerator.setLegal_representative(dto.legal_representative);
         dataGenerator.setAddress(dto.address);
@@ -373,7 +379,7 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataGenerator.setName(dto.name);
         dataGenerator.setType_document_id(typeDocumentRepository.findById(dto.type_document_id).orElse(null));
         dataGenerator.setNumber_id(dto.number_id);
-
+        dataGenerator.setType_weight_id(typeWeightRepository.findById(dto.type_weight_id).orElse(null));
         dataGenerator.setLegal_representative(dto.legal_representative);
         dataGenerator.setAddress(dto.address);
         dataGenerator.setPhone_number(dto.phone_number);
@@ -450,6 +456,8 @@ public class DataGeneratorService implements IDataGeneratorService{
 
         dto.data_manager = mapStructMapper.DataManagerToDataManagerResponseDto(dataGenerator.data_manager_id);
         dto.type_document = mapStructMapper.TypeDocumentToTypeDocumentResponseDto(dataGenerator.type_document_id);
+
+        dto.type_weight = mapStructMapper.TypeWeightToTypeWeightResponseDto(dataGenerator.type_weight_id);
 
 
         List<QuantitiesRcd> entitiesQuantitiesRcd = quantitiesRcdRepository.findByIdDataGenerator(dataGenerator.id_data_generator);

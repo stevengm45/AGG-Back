@@ -37,6 +37,8 @@ public class DataGeneratorRequestDto {
     @NotBlank
     public String reception_date_rcd;
     @NotNull
+    public Long type_weight_id;
+    @NotNull
     public QuantitiesTotal quantitiesRcd;
     @NotNull
     public DataDriverRequestDto data_driver;

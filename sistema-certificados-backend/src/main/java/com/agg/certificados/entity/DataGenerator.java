@@ -28,13 +28,16 @@ public class DataGenerator {
     public Long phone_number;
     public String email;
     public String address_rcd;
+    @ManyToOne
+    @JoinColumn(name = "type_weight_id")
+    public TypeWeight type_weight_id;
     public Long total_rcd;
     public String reception_date_rcd;
     public DataGenerator(){
 
     }
 
-    public DataGenerator(Long id_data_generator, Botadero botadero_id, DataManager data_manager_id, String unic_number, String name, TypeDocument type_document_id, String number_id, String legal_representative, String address, Long phone_number, String email, String address_rcd, Long total_rcd, String reception_date_rcd) {
+    public DataGenerator(Long id_data_generator, Botadero botadero_id, DataManager data_manager_id, String unic_number, String name, TypeDocument type_document_id, String number_id, String legal_representative, String address, Long phone_number, String email, String address_rcd, TypeWeight type_weight_id, Long total_rcd, String reception_date_rcd) {
         this.id_data_generator = id_data_generator;
         this.botadero_id = botadero_id;
         this.data_manager_id = data_manager_id;
@@ -47,6 +50,7 @@ public class DataGenerator {
         this.phone_number = phone_number;
         this.email = email;
         this.address_rcd = address_rcd;
+        this.type_weight_id = type_weight_id;
         this.total_rcd = total_rcd;
         this.reception_date_rcd = reception_date_rcd;
     }
@@ -144,6 +148,14 @@ public class DataGenerator {
 
     public void setAddress_rcd(String address_rcd) {
         this.address_rcd = address_rcd;
+    }
+
+    public TypeWeight getType_weight_id() {
+        return type_weight_id;
+    }
+
+    public void setType_weight_id(TypeWeight type_weight_id) {
+        this.type_weight_id = type_weight_id;
     }
 
     public Long getTotal_rcd() {

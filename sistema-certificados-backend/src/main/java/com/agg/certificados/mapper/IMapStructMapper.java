@@ -16,9 +16,12 @@ public interface IMapStructMapper {
     DataDriverResponseDto DataDriverToDataDriverResponseDto(DataDriver entity);
     QuantitiesRcdResponseDto QuantitiesRcdToQuantitiesRcdResponseDto(QuantitiesRcd entity);
     TypeRcdResponseDto TypeRcdToTypeRcdResponseDto(TypeRcd entity);
+
     CertificationMiniResponseDto CertificationToCertificationMiniResponseDto(Certification certification);
     DataGeneratorEditResponseDto DataGeneratorToDataGeneratorEditResponseDto(DataGenerator entity);
     ManagerDataGeneratorRequestDto ManagerToManagerDataGeneratorRequestDto(List<ManagerDataGenerator> managerList);
     QuantitiesRcdRequestDto QuantitiesRcdToQuantitiesRcdRequestDto(List<QuantitiesRcd> enitities);
     BotaderoResponseDto BotaderoToBotaderoResponseDto(Botadero entity);
+
+    TypeWeightResponseDto TypeWeightToTypeWeightResponseDto(TypeWeight entity);
 }
