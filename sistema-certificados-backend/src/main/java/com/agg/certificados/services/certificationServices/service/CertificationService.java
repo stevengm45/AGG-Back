@@ -5,6 +5,7 @@ import com.agg.certificados.entity.Certification;
 import com.agg.certificados.repositories.certificationRepository.ICertificationRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
 import com.agg.certificados.utils.TypeRcdEnum;
+import com.agg.certificados.utils.TypeWeightEnum;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -130,25 +131,30 @@ public class CertificationService implements ICertificationService {
 
         //-----------------------------------------------------------
 
-        String certificateBotadero = generatePdfFile("certificacion-botadero", data, "Certificacion " + certification.final_number_certification + ".pdf");
-        String certificateBascula = generatePdfFile("certificacion-bascula", data, "CertificacionBascula " + certification.final_number_certification + ".pdf");
+        String certificateBotadero = generatePdfFile
+                ("certificacion-botadero", data, "Certificacion " + certification.final_number_certification + ".pdf");
+
+        String certificateBascula = "";
+
         String certificateCalibracionbascula = "";
-//        try {
-//            certificateCalibracionbascula = waterMark(certification.final_number_certification);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
+        if (Objects.equals(dto.type_weight.id_type_weight, TypeWeightEnum.Kilos.getNumberId())){
+            certification.fileCertificateBascula = "";
+            certificateCalibracionbascula = "";
+        }else{
+            certificateBascula = generatePdfFile
+                    ("certificacion-bascula", data, "CertificacionBascula " + certification.final_number_certification + ".pdf");
+            certification.fileCertificateBascula = certificateBascula;
 
-        try {
-            //certificateCalibracionbascula = addWatermark(loadImageAsBase64("/templates/calibracion-bascula.pdf"));
-            certificateCalibracionbascula = loadImageAsBase64("/templates/calibracion-bascula.pdf");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            try {
+                certificateCalibracionbascula = loadImageAsBase64("/templates/calibracion-bascula.pdf");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
         certification.fileCertificateBotadero = certificateBotadero;
-        certification.fileCertificateBascula = certificateBascula;
 
         //Save certification
         certificationRepository.save(certification);
