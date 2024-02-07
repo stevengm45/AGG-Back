@@ -121,7 +121,7 @@
 <div>
     <img th:src="'data:image/jpeg;base64,' + ${qrcode}" alt="" style="float:right; z-index: -1; margin-top: 0px;margin-right: -20px;"/>
     <div class="box">
-        <span class="number-certification">2024-1056</span>
+        <span class="number-certification" th:text="${certification.final_number_certification}"></span>
     </div>
 </div>
 <br></br><br></br><br></br><br></br>
@@ -266,7 +266,7 @@
 
                 <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 1}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"> </span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description }"> </span>
                         </span>
                 </span>
 
@@ -281,7 +281,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 2}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"></span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description }"></span>
                         </span>
                     </span>
             </td>
@@ -293,7 +293,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 3}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"> </span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description }"> </span>
                         </span>
                     </span>
             </td>
@@ -306,7 +306,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 4}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"> </span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description }"> </span>
                         </span>
                     </span>
             </td>
@@ -332,7 +332,7 @@
     <br></br>
     <img th:src="'data:image/jpeg;base64,' + ${qrcode}" alt="" style="float:right; z-index: -1; margin-top: 0px;margin-right: -20px;"/>
     <div class="box">
-        <span class="number-certification">2024-1056</span>
+        <span class="number-certification" th:text="${certification.final_number_certification}"></span>
     </div>
 </div>
 
@@ -356,7 +356,7 @@
 
                 <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 5}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"> </span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description  }"> </span>
                         </span>
                 </span>
 
@@ -369,7 +369,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 6}">
-                            <span th:text="${item.quantity_rcd  + ' TONELADAS'  }"> </span>
+                            <span th:text="${item.quantity_rcd  + ' ' + generator.type_weight.description  }"> </span>
                         </span>
                     </span>
             </td>
@@ -379,7 +379,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 7}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"> </span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description  }"> </span>
                         </span>
                     </span>
             </td>
@@ -389,7 +389,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 8}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"></span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description  }"></span>
                         </span>
                     </span>
             </td>
@@ -401,7 +401,7 @@
             <td colspan="2">
                     <span th:each="item : ${generator.quantitiesRcd}">
                         <span th:if="${item.type_rcd.id_type_rcd == 9}">
-                            <span th:text="${item.quantity_rcd + ' TONELADAS'  }"></span>
+                            <span th:text="${item.quantity_rcd + ' ' + generator.type_weight.description }"></span>
                         </span>
                     </span>
             </td>
@@ -410,7 +410,7 @@
 
         <tr>
             <th colspan="1" style="text-align: left;">Total, RCD recibidos (t)</th>
-            <td colspan="2" th:text="${generator.total_rcd + ' TONELADAS'  }"></td>
+            <td colspan="2" th:text="${generator.total_rcd + ' ' + generator.type_weight.description }"></td>
         </tr>
         <tr>
             <th colspan="1" style="text-align: left;">Fecha recepción de los RCD</th>

@@ -332,6 +332,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
         DataGeneratorResponseDto dtoDataGenerator = mapStructMapper.DataGeneratorToDataGeneratorResponseDto(entityDataGenerator);
 
+
         //Price rcd
 //        dtoDataGenerator.price_rcd = mapStructMapper.PriceRcdToPriceRcdResponseDto(entityPriceRcd);
 
@@ -426,7 +427,7 @@ public class DataGeneratorService implements IDataGeneratorService{
         DataGeneratorResponseDto dataGeneratorResponseDto = updateFileCertification(dataGenerator.id_data_generator);
 
         // Se le pone false, por que se va a editar una certificacion, que ya esta existente
-        FileBase64ResponseDto files =  certificationService.generateCertificates(dataGeneratorResponseDto, false);
+        FileBase64ResponseDto files =  certificationService.generateCertificates(dataGeneratorResponseDto, false, certification.number_certification);
 
         certification.fileCertificateBotadero = files.fileCertificateBotadero;
         certification.fileCertificateBascula = files.fileCertificateBascula;

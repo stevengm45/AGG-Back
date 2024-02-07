@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -23,10 +22,10 @@ public class CertificateController {
     @Autowired
     private TemplateEngine templateEngine;
 
-    @GetMapping("/{id}")
-    public FileBase64ResponseDto generateCertificates(@PathVariable("id") Long idDataGenerator){
+    @GetMapping("/{id}/{consecutive}")
+    public FileBase64ResponseDto generateCertificates(@PathVariable("id") Long idDataGenerator, @PathVariable("consecutive") Long consecutive){
         //Se le pone true, por que es una certificacion nueva
-        return certificateService.generateCertificates(dataGeneratorService.getInformationCertificate(idDataGenerator),true);
+        return certificateService.generateCertificates(dataGeneratorService.getInformationCertificate(idDataGenerator),true, consecutive);
     }
     @GetMapping()
     public List<BandejaCertificacionesResponseDto> getCertifications(@RequestParam(required = false) String create_date,

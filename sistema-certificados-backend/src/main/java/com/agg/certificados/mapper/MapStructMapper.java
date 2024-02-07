@@ -48,6 +48,7 @@ public class MapStructMapper implements IMapStructMapper{
         dto.address_rcd = entity.address_rcd;
         dto.reception_date_rcd = entity.reception_date_rcd;
         dto.total_rcd = entity.total_rcd;
+        dto.type_weight = TypeWeightToTypeWeightResponseDto(entity.type_weight_id);
 
         return dto;
     }
@@ -226,6 +227,13 @@ public class MapStructMapper implements IMapStructMapper{
 
     @Override
     public TypeWeightResponseDto TypeWeightToTypeWeightResponseDto(TypeWeight entity) {
-        return null;
+
+        TypeWeightResponseDto dto = new TypeWeightResponseDto();
+        dto.id_type_weight = entity.id_type_weight;
+        dto.name = entity.name;
+        dto.status = entity.status;
+        dto.description = entity.description;
+
+        return dto;
     }
 }

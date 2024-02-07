@@ -1,9 +1,6 @@
 package com.agg.certificados.services.certificationServices.service;
 
-import com.agg.certificados.dtos.response.BandejaCertificacionesResponseDto;
-import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
-import com.agg.certificados.dtos.response.FileBase64ResponseDto;
-import com.agg.certificados.dtos.response.QuantitiesRcdResponseDto;
+import com.agg.certificados.dtos.response.*;
 import com.agg.certificados.entity.Certification;
 import com.agg.certificados.repositories.certificationRepository.ICertificationRepository;
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
@@ -104,10 +101,10 @@ public class CertificationService implements ICertificationService {
     }
 
     //@Transactional
-    public FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto, boolean isNew) {
+    public FileBase64ResponseDto generateCertificates(DataGeneratorResponseDto dto, boolean isNew, Long consecutive) {
 
 
-        Certification certification = createCertification(dto.id_data_generator, isNew);
+        Certification certification = createCertification(dto.id_data_generator, isNew, consecutive);
         Map<String, Object> data = MapeoDatos(dto, certification);
 
 
@@ -166,7 +163,7 @@ public class CertificationService implements ICertificationService {
 
     }
 
-    public Certification createCertification(Long idDataGenerator, boolean isNew) {
+    public Certification createCertification(Long idDataGenerator, boolean isNew, Long consecutive) {
         if (isNew) {
             Certification certification = new Certification();
 
@@ -186,14 +183,9 @@ public class CertificationService implements ICertificationService {
             Long number_certification = certificationRepository
                     .findByMaxNumberCertification(LocalDate.now().getYear());
 
-            if (number_certification == null) {
-                certification.number_certification = 1L;
-            } else {
-                certification.number_certification = number_certification + 1L;
-            }
+            certification.number_certification = consecutive;
 
-            certification.final_number_certification = String.valueOf(certification.create_date.getYear()) + "-" +
-                    String.format("%03d", certification.number_certification);
+            certification.final_number_certification = String.valueOf(certification.create_date.getYear()) + "-" + consecutive;
 
             return certification;
         } else {
@@ -224,7 +216,7 @@ public class CertificationService implements ICertificationService {
         Map<String, Object> data = new HashMap<>();
 
         //Agregar el tema de si son toneladas o kilos
-        String quantitiesPesaje = quantitiesPesaje(dto.quantitiesRcd);
+        String quantitiesPesaje = quantitiesPesaje(dto.quantitiesRcd, dto.type_weight);
 
         data.put("quantitiespesaje", quantitiesPesaje);
 
@@ -319,7 +311,7 @@ public class CertificationService implements ICertificationService {
         return Base64.getEncoder().encodeToString(outputStream.toByteArray());
 
     }
-    private String quantitiesPesaje(List<QuantitiesRcdResponseDto> dto){
+    private String quantitiesPesaje(List<QuantitiesRcdResponseDto> dto, TypeWeightResponseDto typeWeigth){
         String response = "";
 
         Long quantityAprovechamiento = 0L;
@@ -340,13 +332,13 @@ public class CertificationService implements ICertificationService {
 
         if (quantityAprovechamiento > 0){
             //Concatenar si son toneladas o kilos, hacer lo mismo con el otro
-            response+=  quantityAprovechamiento + " de Rcd de aprovechamiento, ";
+            response+=  quantityAprovechamiento + " " + typeWeigth.description + " de Rcd de aprovechamiento, ";
         }
         if (quantityTierra > 0){
-            response+=  quantityTierra + " de Tierra o material vegetal, ";
+            response+=  quantityTierra + " " + typeWeigth.description + " de Tierra o material vegetal, ";
         }
         if (quantityMaterialRcd > 0){
-            response+=  quantityMaterialRcd + " de Material RCD, ";
+            response+=  quantityMaterialRcd + " " + typeWeigth.description +" de Material RCD, ";
         }
 
         return response;
