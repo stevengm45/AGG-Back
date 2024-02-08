@@ -6,19 +6,18 @@ import com.agg.certificados.repositories.certificationRepository.ICertificationR
 import com.agg.certificados.repositories.dataGeneratorRepository.IDataGeneratorRepository;
 import com.agg.certificados.utils.TypeRcdEnum;
 import com.agg.certificados.utils.TypeWeightEnum;
+import com.aspose.pdf.Document;
+import com.aspose.pdf.HorizontalAlignment;
+import com.aspose.pdf.VerticalAlignment;
+import com.aspose.pdf.WatermarkArtifact;
+import com.aspose.pdf.facades.EncodingType;
+import com.aspose.pdf.facades.FontStyle;
+import com.aspose.pdf.facades.FormattedText;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfPage;
-import com.itextpdf.kernel.pdf.PdfReader;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.text.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -36,6 +36,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.List;
 
 
 @Service
@@ -147,11 +148,10 @@ public class CertificationService implements ICertificationService {
             certification.fileCertificateBascula = certificateBascula;
 
             try {
-                certificateCalibracionbascula = loadImageAsBase64("/templates/calibracion-bascula.pdf");
+                certificateCalibracionbascula = waterMark(certification.final_number_certification);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         }
 
         certification.fileCertificateBotadero = certificateBotadero;
@@ -280,43 +280,50 @@ public class CertificationService implements ICertificationService {
         return date;
     }
 
-    public String loadImageAsBase64(String imagePath) throws IOException {
+    public byte[] loadImageAsBase64(String imagePath) throws IOException {
         ClassPathResource resource = new ClassPathResource(imagePath);
-        byte[] bytes = StreamUtils.copyToByteArray(resource.getInputStream());
-        return Base64.getEncoder().encodeToString(bytes);
+        return StreamUtils.copyToByteArray(resource.getInputStream());
     }
 
-    public String addWatermark(byte[] pdfBytes) throws IOException, DocumentException {
+    private String waterMark(String final_number_certification) throws IOException {
 
-        // Crear un ByteArrayOutputStream para almacenar el documento PDF modificado
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        String path = "templates/calibracion-bascula.pdf";
 
-        // Crear un PdfWriter con el ByteArrayOutputStream
-        PdfWriter writer = new PdfWriter(outputStream);
+        // Leer el contenido del archivo PDF como un arreglo de bytes
+        byte[] pdfBytes = loadImageAsBase64(path);
 
-        // Abrir el documento existente
-        PdfDocument pdfDoc = new PdfDocument(new PdfReader("templates/calibracion-bascula.pdf"), writer);
+// Load PDF document
+        ByteArrayOutputStream byteArrayOutputStream;
+        try (Document doc = new Document(pdfBytes)) {
 
-        // Obtener la primera página del documento
-        PdfPage page = pdfDoc.getFirstPage();
+// Create a formatted text
+            FormattedText formattedText = new FormattedText("Certificación " + final_number_certification, Color.red, FontStyle.CourierBold, EncodingType.Identity_h, true, 25.0F);
 
-        // Crear un objeto Document para trabajar con la página
-        Document doc = new Document(pdfDoc, pdfDoc.getDefaultPageSize());
+// Create watermark artifact and set its properties
+            WatermarkArtifact artifact = new WatermarkArtifact();
+            artifact.setText(formattedText);
+            artifact.setArtifactHorizontalAlignment(HorizontalAlignment.Center);
+            artifact.setArtifactVerticalAlignment(VerticalAlignment.Center);
+            artifact.setRotation(25);
+            artifact.setOpacity(0.5);
+            artifact.setBackground(false);
 
-        // Agregar un nuevo párrafo con el texto deseado
-        Paragraph paragraph = new Paragraph("Texto agregado al PDF existente.")
-                .setTextAlignment(TextAlignment.CENTER);
+// Add watermark to the first page of PDF
 
-        // Agregar el párrafo al documento
-        doc.add(paragraph);
+            doc.getPages().get_Item(1).getArtifacts().add(artifact);
+            doc.getPages().get_Item(2).getArtifacts().add(artifact);
+            doc.getPages().get_Item(3).getArtifacts().add(artifact);
+            doc.getPages().get_Item(4).getArtifacts().add(artifact);
 
-        // Cerrar el documento
-        pdfDoc.close();
 
-        // Convertir el arreglo de bytes a una cadena Base64
-        return Base64.getEncoder().encodeToString(outputStream.toByteArray());
+// Save watermarked PDF document
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            doc.save(byteArrayOutputStream);
+        }
 
+        return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
     }
+
     private String quantitiesPesaje(List<QuantitiesRcdResponseDto> dto, TypeWeightResponseDto typeWeigth){
         String response = "";
 
