@@ -513,6 +513,7 @@ public class DataGeneratorService implements IDataGeneratorService{
         responseDto.certification = mapStructMapper.CertificationToCertificationMiniResponseDto(certification);
         responseDto.manager = mapStructMapper.ManagerToManagerDataGeneratorRequestDto(managerDataGeneratorRepository.findByIdDataGenerator(dataGenerator.id_data_generator));
         responseDto.quantitiesRcd = mapStructMapper.QuantitiesRcdToQuantitiesRcdRequestDto(quantitiesRcdRepository.findByIdDataGenerator(dataGenerator.id_data_generator));
+        responseDto.type_weight = mapStructMapper.TypeWeightToTypeWeightResponseDto(typeWeightRepository.findById(dataGenerator.type_weight_id.id_type_weight).orElse(null));
 
         return responseDto;
     }

@@ -2,9 +2,6 @@ package com.agg.certificados.dtos.response;
 
 import com.agg.certificados.dtos.request.ManagerDataGeneratorRequestDto;
 import com.agg.certificados.dtos.request.QuantitiesRcdRequestDto;
-import com.agg.certificados.dtos.request.QuantitiesTotal;
-
-import java.util.List;
 
 public class DataGeneratorEditResponseDto {
     public Long id_data_generator;
@@ -25,4 +22,5 @@ public class DataGeneratorEditResponseDto {
     public QuantitiesRcdRequestDto quantitiesRcd;
     public DataDriverResponseDto data_driver;
     public CertificationMiniResponseDto certification;
+    public TypeWeightResponseDto type_weight;
 }
