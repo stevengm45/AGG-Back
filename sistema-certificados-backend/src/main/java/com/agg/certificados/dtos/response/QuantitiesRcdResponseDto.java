@@ -4,5 +4,5 @@ public class QuantitiesRcdResponseDto {
     public Long id_quantities_rcd;
     public TypeRcdResponseDto type_rcd;
     public Long data_generator_id;
-    public Long quantity_rcd;
+    public Double quantity_rcd;
 }

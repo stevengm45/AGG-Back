@@ -3,7 +3,9 @@ package com.agg.certificados.services.dataGeneratorServices;
 import com.agg.certificados.dtos.request.DataGeneratorRequestDto;
 import com.agg.certificados.dtos.request.ManagerDataGeneratorRequestDto;
 import com.agg.certificados.dtos.request.QuantitiesRcdRequestDto;
-import com.agg.certificados.dtos.response.*;
+import com.agg.certificados.dtos.response.DataGeneratorEditResponseDto;
+import com.agg.certificados.dtos.response.DataGeneratorResponseDto;
+import com.agg.certificados.dtos.response.FileBase64ResponseDto;
 import com.agg.certificados.entity.*;
 import com.agg.certificados.mapper.IMapStructMapper;
 import com.agg.certificados.repositories.botaderoRepository.IBotaderoRepository;
@@ -24,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +83,10 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataGenerator.setEmail(dto.email);
         dataGenerator.setAddress_rcd(dto.address_rcd);
 
-        dataGenerator.setTotal_rcd(dto.quantitiesRcd.total); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
+        DecimalFormat formato = new DecimalFormat("#.##");
+
+
+        dataGenerator.setTotal_rcd(Double.parseDouble(formato.format(dto.quantitiesRcd.total))); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
 
         dataGenerator.setReception_date_rcd(dto.reception_date_rcd);
 
@@ -131,7 +137,7 @@ public class DataGeneratorService implements IDataGeneratorService{
         List<QuantitiesRcd> quantitiesList = new ArrayList<>();
 
         if (quantities.quantity_rcd_1 != null){
-            if (quantities.quantity_rcd_1 >0){
+            if (quantities.quantity_rcd_1 >= 0){
 
                     if(dataGenerator.id_data_generator == null){
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.Uno.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_1));
@@ -149,7 +155,7 @@ public class DataGeneratorService implements IDataGeneratorService{
             }
         }
         if (quantities.quantity_rcd_2 != null){
-            if (quantities.quantity_rcd_2 > 0) {
+            if (quantities.quantity_rcd_2 >= 0) {
 
                 if (dataGenerator != null){
                     if(dataGenerator.id_data_generator == null){
@@ -169,7 +175,7 @@ public class DataGeneratorService implements IDataGeneratorService{
         }
 
         if (quantities.quantity_rcd_3 != null){
-            if (quantities.quantity_rcd_3 > 0) {
+            if (quantities.quantity_rcd_3 >= 0) {
                 if (dataGenerator != null){
 
                     if(dataGenerator.id_data_generator == null) {
@@ -189,7 +195,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
 
         if (quantities.quantity_rcd_4 != null){
-            if (quantities.quantity_rcd_4 > 0 ) {
+            if (quantities.quantity_rcd_4 >= 0 ) {
                 if (dataGenerator != null){
                     if(dataGenerator.id_data_generator == null ) {
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.UnoTres.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_4));
@@ -209,7 +215,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
 
         if (quantities.quantity_rcd_5 != null){
-            if (quantities.quantity_rcd_5 >0) {
+            if (quantities.quantity_rcd_5 >= 0) {
                 if (dataGenerator != null){
                     if(dataGenerator.id_data_generator == null)  {
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.UnoCuatro.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_5));
@@ -229,7 +235,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
 
         if (quantities.quantity_rcd_6 != null){
-            if (quantities.quantity_rcd_6 >0) {
+            if (quantities.quantity_rcd_6 >= 0) {
                 if (dataGenerator != null){
                     if(dataGenerator.id_data_generator == null) {
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.Dos.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_6));
@@ -248,7 +254,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
 
         if (quantities.quantity_rcd_7 != null){
-            if (quantities.quantity_rcd_7 >0) {
+            if (quantities.quantity_rcd_7 >= 0) {
                 if (dataGenerator != null){
                     if(dataGenerator.id_data_generator == null) {
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.DosUno.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_7));
@@ -267,7 +273,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
 
         if (quantities.quantity_rcd_8 != null){
-            if (quantities.quantity_rcd_8 >0) {
+            if (quantities.quantity_rcd_8 >= 0) {
                 if (dataGenerator != null){
                     if(dataGenerator.id_data_generator == null) {
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.DosDos.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_8));
@@ -288,7 +294,7 @@ public class DataGeneratorService implements IDataGeneratorService{
 
 
         if (quantities.quantity_rcd_9 != null){
-            if (quantities.quantity_rcd_9 >0 ) {
+            if (quantities.quantity_rcd_9 >= 0 ) {
                 if (dataGenerator !=  null){
                     if(dataGenerator.id_data_generator == null) {
                         quantitiesList.add(new QuantitiesRcd(0L,typeRcdRepository.findById(TypeRcdEnum.DosTres.getNumberId()).orElse(null),dataGenerator,quantities.quantity_rcd_9));
@@ -386,8 +392,9 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataGenerator.setPhone_number(dto.phone_number);
         dataGenerator.setEmail(dto.email);
         dataGenerator.setAddress_rcd(dto.address_rcd);
+        DecimalFormat formato = new DecimalFormat("#.##");
 
-        dataGenerator.setTotal_rcd(dto.quantitiesRcd.total); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
+        dataGenerator.setTotal_rcd(Double.parseDouble(formato.format(dto.quantitiesRcd.total))); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
 
         dataGenerator.setReception_date_rcd(dto.reception_date_rcd);
 
@@ -404,8 +411,9 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataDriver.setData_generator_id(dataGenerator);
 
         //Quantities
+        //Eliminar todos los quantities rcd
 
-
+        //Insertar los nuevos quantities rcd
         List<QuantitiesRcd> quantities = mappingQuantitiesRcd(dto.quantitiesRcd.quantities,dataGenerator);
 
 

@@ -179,4 +179,9 @@ public class QuantitiesRcdRepository implements IQuantitiesRcdRepository{
     public QuantitiesRcd findByIdDataGeneratorAndIdTypeRcd(Long idDataGenerator, Long idTypeRcd) {
         return findByIdDataGeneratorAndIdTypeRcd(idDataGenerator,idTypeRcd);
     }
+
+    @Override
+    public QuantitiesRcd deleteByIdDataGenerator(Long idDataGenerator) {
+        return deleteByIdDataGenerator(idDataGenerator);
+    }
 }

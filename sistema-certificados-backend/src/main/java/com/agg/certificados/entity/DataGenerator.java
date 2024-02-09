@@ -2,6 +2,7 @@ package com.agg.certificados.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "data_generators")
 public class DataGenerator {
@@ -31,13 +32,13 @@ public class DataGenerator {
     @ManyToOne
     @JoinColumn(name = "type_weight_id")
     public TypeWeight type_weight_id;
-    public Long total_rcd;
+    public double total_rcd;
     public String reception_date_rcd;
     public DataGenerator(){
 
     }
 
-    public DataGenerator(Long id_data_generator, Botadero botadero_id, DataManager data_manager_id, String unic_number, String name, TypeDocument type_document_id, String number_id, String legal_representative, String address, Long phone_number, String email, String address_rcd, TypeWeight type_weight_id, Long total_rcd, String reception_date_rcd) {
+    public DataGenerator(Long id_data_generator, Botadero botadero_id, DataManager data_manager_id, String unic_number, String name, TypeDocument type_document_id, String number_id, String legal_representative, String address, Long phone_number, String email, String address_rcd, TypeWeight type_weight_id, double total_rcd, String reception_date_rcd) {
         this.id_data_generator = id_data_generator;
         this.botadero_id = botadero_id;
         this.data_manager_id = data_manager_id;
@@ -158,11 +159,11 @@ public class DataGenerator {
         this.type_weight_id = type_weight_id;
     }
 
-    public Long getTotal_rcd() {
+    public double getTotal_rcd() {
         return total_rcd;
     }
 
-    public void setTotal_rcd(Long total_rcd) {
+    public void setTotal_rcd(double total_rcd) {
         this.total_rcd = total_rcd;
     }
 

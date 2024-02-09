@@ -327,9 +327,9 @@ public class CertificationService implements ICertificationService {
     private String quantitiesPesaje(List<QuantitiesRcdResponseDto> dto, TypeWeightResponseDto typeWeigth){
         String response = "";
 
-        Long quantityAprovechamiento = 0L;
-        Long quantityTierra = 0L;
-        Long quantityMaterialRcd = 0L;
+        double quantityAprovechamiento = 0;
+        double quantityTierra = 0;
+        double quantityMaterialRcd = 0;
 
         for(QuantitiesRcdResponseDto item : dto){
             if(Objects.equals(item.type_rcd.id_type_rcd, TypeRcdEnum.Uno.getNumberId())){

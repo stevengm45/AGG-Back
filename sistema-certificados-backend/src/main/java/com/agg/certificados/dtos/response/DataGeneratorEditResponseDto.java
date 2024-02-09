@@ -18,7 +18,7 @@ public class DataGeneratorEditResponseDto {
     public String email;
     public String address_rcd;
     public String reception_date_rcd;
-    public Long total_rcd;
+    public double total_rcd;
     public QuantitiesRcdRequestDto quantitiesRcd;
     public DataDriverResponseDto data_driver;
     public CertificationMiniResponseDto certification;

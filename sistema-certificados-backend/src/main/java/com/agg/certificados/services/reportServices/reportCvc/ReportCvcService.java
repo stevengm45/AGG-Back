@@ -207,9 +207,9 @@ public class ReportCvcService implements IReportCvcService{
         return names.toString();
     }
 
-    private List<Long> getSumQuantitiesRcd(List<QuantitiesRcd> dataQuantities ){
-        Long dataAprovechado = 0L;
-        Long dataFinalmente = 0L;
+    private List<Double> getSumQuantitiesRcd(List<QuantitiesRcd> dataQuantities ){
+        double dataAprovechado = 0;
+        double dataFinalmente = 0;
         for (QuantitiesRcd item: dataQuantities){
             if (item.type_rcd_id.id_type_rcd == 1){
                 dataAprovechado += item.quantity_rcd;
@@ -231,7 +231,7 @@ public class ReportCvcService implements IReportCvcService{
                 dataFinalmente += item.quantity_rcd;
             }
         }
-        List<Long> response = new ArrayList<>();
+        List<Double> response = new ArrayList<>();
         response.add(0,dataAprovechado);
         response.add(1,dataFinalmente);
         return response;

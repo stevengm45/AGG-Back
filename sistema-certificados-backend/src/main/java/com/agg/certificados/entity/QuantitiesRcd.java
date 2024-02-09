@@ -15,12 +15,12 @@ public class QuantitiesRcd {
     @ManyToOne
     @JoinColumn(name = "data_generator_id")
     public DataGenerator data_generator_id;
-    public Long quantity_rcd;
+    public double quantity_rcd;
 
     public QuantitiesRcd() {
     }
 
-    public QuantitiesRcd(Long id_quantities_rcd, TypeRcd type_rcd_id, DataGenerator data_generator_id, Long quantity_rcd) {
+    public QuantitiesRcd(Long id_quantities_rcd, TypeRcd type_rcd_id, DataGenerator data_generator_id, double quantity_rcd) {
         this.id_quantities_rcd = id_quantities_rcd;
         this.type_rcd_id = type_rcd_id;
         this.data_generator_id = data_generator_id;
@@ -51,11 +51,11 @@ public class QuantitiesRcd {
         this.data_generator_id = data_generator_id;
     }
 
-    public Long getQuantity_rcd() {
+    public double getQuantity_rcd() {
         return quantity_rcd;
     }
 
-    public void setQuantity_rcd(Long quantity_rcd) {
+    public void setQuantity_rcd(double quantity_rcd) {
         this.quantity_rcd = quantity_rcd;
     }
 }
