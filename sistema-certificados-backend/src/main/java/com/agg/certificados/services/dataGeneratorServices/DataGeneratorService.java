@@ -392,9 +392,9 @@ public class DataGeneratorService implements IDataGeneratorService{
         dataGenerator.setPhone_number(dto.phone_number);
         dataGenerator.setEmail(dto.email);
         dataGenerator.setAddress_rcd(dto.address_rcd);
-        DecimalFormat formato = new DecimalFormat("#.##");
+//        DecimalFormat formato = new DecimalFormat("#.##");
 
-        dataGenerator.setTotal_rcd(Double.parseDouble(formato.format(dto.quantitiesRcd.total))); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
+        dataGenerator.setTotal_rcd(dto.quantitiesRcd.total); //Revisar este total, para quitarlo del dto y ponerlo calculado directo aqui mismo
 
         dataGenerator.setReception_date_rcd(dto.reception_date_rcd);
 
