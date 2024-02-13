@@ -12,9 +12,9 @@ public class Certification {
     @ManyToOne
     @JoinColumn(name = "data_generator_id")
     public DataGenerator data_generator_id;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     public String fileCertificateBotadero;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGTEXT")
     public String fileCertificateBascula;
     public LocalDate create_date;
     public Long number_certification;
