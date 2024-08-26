@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                 .disable()
-                .cors()
-                .disable()
+                .cors()  // Habilitar CORS
+                .and()
                 .authorizeRequests()
                 .antMatchers("/generate-token","/usuarios/","/generator/{idDataGenerator}").permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
@@ -63,5 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 
 }
