@@ -100,59 +100,7 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 			User saveUser = userService.saveUser(user1, userRoles);
 
 
-			User user2 = new User();
 
-			user2.setFull_name("Fabiola Asprilla Caceres");
-			user2.setUsername("fabiola.asprilla");
-			user2.setPassword(bCryptPasswordEncoder.encode("Fasprilla*2024"));
-			user2.setEmail("Suministramosycontratamos@gmail.com");
-			user2.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
-			user2.setNumber_id(31880147L);
-			user2.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
-
-
-			Set<UserRol> userRoles2 = new HashSet<>();
-			UserRol userRol2 = new UserRol();
-			userRol2.setRol(rol);
-			userRol2.setUser(user2);
-			userRoles2.add(userRol2);
-			userService.saveUser(user2, userRoles2);
-
-			User user3 = new User();
-
-			user3.setFull_name("Carolina Diaz Rivera");
-			user3.setUsername("carolina.diaz");
-			user3.setPassword(bCryptPasswordEncoder.encode("Cdiaz*2024"));
-			user3.setEmail("Suministramosycontratamos@gmail.com");
-			user3.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
-			user3.setNumber_id(31571893L);
-			user3.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
-
-
-			Set<UserRol> userRoles3 = new HashSet<>();
-			UserRol userRol3 = new UserRol();
-			userRol3.setRol(rol);
-			userRol3.setUser(user3);
-			userRoles3.add(userRol3);
-			userService.saveUser(user3, userRoles3);
-
-			User user4 = new User();
-
-			user4.setFull_name("Monica Yoreli Rodriguez");
-			user4.setUsername("monica.rodriguez");
-			user4.setPassword(bCryptPasswordEncoder.encode("Mrodriguez*2024"));
-			user4.setEmail("Suministramosycontratamos@gmail.com");
-			user4.setType_document_id(typeDocumentRepository.findById(1L).orElse(null));
-			user4.setNumber_id(1143977626L);
-			user4.setCreate_date(Timestamp.valueOf(LocalDateTime.now()));
-
-
-			Set<UserRol> userRoles4 = new HashSet<>();
-			UserRol userRol4 = new UserRol();
-			userRol4.setRol(rol);
-			userRol4.setUser(user4);
-			userRoles4.add(userRol4);
-			userService.saveUser(user4, userRoles4);
 
 		} catch(UserFoundException e) {
 			e.printStackTrace();
