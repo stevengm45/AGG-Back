@@ -99,9 +99,6 @@ public class SistemaCertificadosBackendApplication implements CommandLineRunner 
 
 			User saveUser = userService.saveUser(user1, userRoles);
 
-
-
-
 		} catch(UserFoundException e) {
 			e.printStackTrace();
 		}
